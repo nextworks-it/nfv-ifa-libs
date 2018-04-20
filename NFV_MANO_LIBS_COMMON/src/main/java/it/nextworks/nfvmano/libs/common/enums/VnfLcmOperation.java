@@ -1,0 +1,20 @@
+package it.nextworks.nfvmano.libs.common.enums;
+
+public enum VnfLcmOperation {
+
+	INSTATIATE_VNF,
+	QUERY_VNF,
+	TERMINATE_VNF,
+	SCALE_IN_VNF,
+	SCALE_OUT_VNF,
+	SCALE_UP_VNF,
+	SCALE_DOWN_VNF,
+	SCALE_VNF_TO_LEVEL,
+	CHANGE_VNF_FLAVOUR,
+	OPERATE_VNF,
+	UPDATE_VNF,
+	MODIFY_VNF,
+	HEAL_VNF,
+	CHANGE_EXT_VNF_CONNECTIVITY
+	
+}

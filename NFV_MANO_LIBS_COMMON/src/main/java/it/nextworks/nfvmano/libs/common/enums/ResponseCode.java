@@ -1,0 +1,11 @@
+package it.nextworks.nfvmano.libs.common.enums;
+
+public enum ResponseCode {
+	
+	OK,
+	FAILED_GENERIC,
+	FAILED_ALREADY_EXISTING_RESOURCE,
+	FAILED_MALFORMATTED_RESOURCE,
+	FAILED_WRONG_STATUS,
+	FAILED_NOT_EXISTING_RESOURCE
+}
