@@ -35,6 +35,7 @@ public class Filter {
 	//VSB_NAME & VSB_VERSION
 	//VSB_ID
 	//VSD_ID
+	//VSI_ID
 	//TENANT_ID
 	private Map<String,String> parameters = new HashMap<>();
 	
