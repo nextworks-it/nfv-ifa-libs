@@ -1,11 +1,11 @@
 package it.nextworks.nfvmano.libs.catalogues.interfaces;
 
 import java.io.File;
-import java.util.List;
 
-import it.nextworks.nfvmano.libs.catalogues.interfaces.elements.AppPackageInfo;
+
 import it.nextworks.nfvmano.libs.catalogues.interfaces.messages.OnboardAppPackageRequest;
 import it.nextworks.nfvmano.libs.catalogues.interfaces.messages.OnboardAppPackageResponse;
+import it.nextworks.nfvmano.libs.catalogues.interfaces.messages.QueryOnBoadedAppPkgInfoResponse;
 import it.nextworks.nfvmano.libs.common.exceptions.AlreadyExistingEntityException;
 import it.nextworks.nfvmano.libs.common.exceptions.FailedOperationException;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
@@ -52,7 +52,7 @@ public interface MecAppPackageManagementProviderInterface {
 	 * @throws NotExistingEntityException if the package does not exist
 	 * @throws MalformattedElementException if the request is malformatted
 	 */
-	public List<AppPackageInfo> queryApplicationPackage(GeneralizedQueryRequest request)
+	public QueryOnBoadedAppPkgInfoResponse queryApplicationPackage(GeneralizedQueryRequest request)
 			throws MethodNotImplementedException, NotExistingEntityException, MalformattedElementException;
 	
 	/**
