@@ -21,7 +21,7 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
 /**
  * This information element provides information about a PNF that is part of an NS instance.
- * Ref. IFA 013 v2.3.1 section 8.3.3.9
+ * Ref. IFA 013 v2.4.1 section 8.3.3.9
  * 
  * @author nextworks
  *
@@ -39,8 +39,11 @@ public class PnfInfo implements DescriptorInformationElement {
 	@ManyToOne
 	private NsInfo nsInfo;
 	
+	private String pnfId;
 	private String pnfName;
-	private String pnfInfoId;
+	private String pnfdId;
+	private String pnfdInfoId;
+	private String pnfProfileId;
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
@@ -55,21 +58,83 @@ public class PnfInfo implements DescriptorInformationElement {
 	 * Constructor
 	 * 
 	 * @param nsInfo NS info this element belongs to
-	 * @param pnfName Name of the PNF.
-	 * @param pnfInfoId Identifier of (reference to) the PNFD information related to this PNF.
+	 * @param pnfId Identifier of the PNF. Assigned by OSS and provided to NFVO.
+	 * @param pnfName Human readable name of the PNF.
+	 * @param pfndId Identifier of the PNFD.
+	 * @param pnfdInfoId Identifier of (reference to) the PNFD information related to this PNF.
+	 * @param pnfProfileId Identifier of (reference to) the PNF Profile to be used for this PNF.
 	 * @param cpInfo Information on the external CP of the PNF.
 	 */
-	public PnfInfo(NsInfo nsInfo, String pnfName, String pnfInfoId, List<PnfExtCpInfo> cpInfo) {
+	public PnfInfo(NsInfo nsInfo, String pnfId, String pnfName, String pnfdId, String pnfdInfoId, String pnfProfileId, List<PnfExtCpInfo> cpInfo) {
 		this.nsInfo = nsInfo;
-		this.pnfInfoId = pnfInfoId;
+		this.pnfId = pnfId;
+		this.pnfdId = pnfdId;
+		this.pnfdInfoId = pnfdInfoId;
 		this.pnfName = pnfName;
+		this.pnfProfileId = pnfProfileId;
 		if (cpInfo != null) this.cpInfo = cpInfo;
+	}
+	
+	
+
+	/**
+	 * @return the pnfName
+	 */
+	public String getPnfName() {
+		return pnfName;
+	}
+
+	/**
+	 * @return the pnfdInfoId
+	 */
+	public String getPnfdInfoId() {
+		return pnfdInfoId;
+	}
+
+	/**
+	 * @return the cpInfo
+	 */
+	public List<PnfExtCpInfo> getCpInfo() {
+		return cpInfo;
+	}
+	
+	
+
+	/**
+	 * @return the nsInfo
+	 */
+	public NsInfo getNsInfo() {
+		return nsInfo;
+	}
+
+	/**
+	 * @return the pnfId
+	 */
+	public String getPnfId() {
+		return pnfId;
+	}
+
+	/**
+	 * @return the pnfdId
+	 */
+	public String getPnfdId() {
+		return pnfdId;
+	}
+
+	/**
+	 * @return the pnfProfileId
+	 */
+	public String getPnfProfileId() {
+		return pnfProfileId;
 	}
 
 	@Override
 	public void isValid() throws MalformattedElementException {
-		if (this.pnfInfoId == null) throw new MalformattedElementException("PNF info without ID");
+		if (this.pnfId == null) throw new MalformattedElementException("PNF info without PNF ID");
+		if (this.pnfdId == null) throw new MalformattedElementException("PNF info without PNFD ID");
+		if (this.pnfdInfoId == null) throw new MalformattedElementException("PNF info without PNFD info ID");
 		if (this.pnfName == null) throw new MalformattedElementException("PNF info without name");
+		if (this.pnfProfileId == null) throw new MalformattedElementException("PNF info without PNF profile ID");
 		if ((this.cpInfo == null) || (this.cpInfo.isEmpty())) {
 			throw new MalformattedElementException("PNF info without CP information");
 		} else {
