@@ -47,6 +47,8 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.common.exceptions.NotExistingEntityException;
 import it.nextworks.nfvmano.libs.descriptors.common.elements.LifeCycleManagementScript;
 import it.nextworks.nfvmano.libs.descriptors.common.elements.Rule;
+import it.nextworks.nfvmano.libs.descriptors.common.elements.VirtualLinkProfile;
+import it.nextworks.nfvmano.libs.records.nsinfo.UserAccessInfo;
 
 /**
  * The NSD information element is a deployment template 
@@ -475,6 +477,45 @@ public class Nsd implements DescriptorInformationElement {
 		}
 		
 		return vnfdIds;
+	}
+	
+	
+	@JsonIgnore
+	public List<UserAccessInfo> getUserAccessInfo(String nsFlavourId, String nsInstantiationLevel) 
+		throws NotExistingEntityException {
+		
+		List<UserAccessInfo> uais = new ArrayList<>(); 
+		
+		//Read the right NS level
+		NsDf nsDeploymentFlavour = getNsDeploymentFlavour(nsFlavourId);
+		NsLevel nsLevel;
+		if (nsInstantiationLevel != null) nsLevel = nsDeploymentFlavour.getNsLevel(nsInstantiationLevel);
+		else nsLevel = nsDeploymentFlavour.getDefaultInstantiationLevel();
+		
+		//Read the VNFs in the NS level and verify if they are connected to a VL associated to a SAP. This info is in the VNF profile
+		List<VnfToLevelMapping> vnfLevels = nsLevel.getVnfToLevelMapping();
+		for (VnfToLevelMapping vnf : vnfLevels) {
+			VnfProfile vnfProfile = nsDeploymentFlavour.getVnfProfile(vnf.getVnfProfileId());
+			String vnfdId = vnfProfile.getVnfdId();
+			
+			//Get all the VLs the VNF is connected to.
+			List<NsVirtualLinkConnectivity> nsVlConns = vnfProfile.getNsVirtualLinkConnectivity();
+			for (NsVirtualLinkConnectivity nsVlConn : nsVlConns) {
+				
+				//For each of the VLs connected to the VNF, it checks if the VL is connected to a SAP
+				String vlProfileId = nsVlConn.getVirtualLinkProfileId();
+				VirtualLinkProfile vlp = nsDeploymentFlavour.getVirtualLinkProfile(vlProfileId);
+				String vldId = vlp.getVirtualLinkDescId();
+				Sapd sapd = getSapForVl(vldId);
+				if (sapd != null) {
+					//This means that the VL of the current VL profile is associated to a SAP
+					UserAccessInfo uai = new UserAccessInfo(sapd.getCpdId(), vnfdId, null, nsVlConn.getCpdId().get(0), null);
+					uais.add(uai);
+				}
+			}
+		}
+		
+		return uais;
 	}
 	
 }

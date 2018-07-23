@@ -117,9 +117,9 @@ public class NsInfo implements DescriptorInformationElement {
 	private List<VnffgInfo> vnffgInfo = new ArrayList<>();
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	@ElementCollection(fetch=FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@OneToMany(mappedBy = "nsInfo", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<SapInfo> sapInfo = new ArrayList<>();
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -128,6 +128,12 @@ public class NsInfo implements DescriptorInformationElement {
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<String> nestedNsInfoId = new ArrayList<>();
 	
+//	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+//	@ElementCollection(fetch=FetchType.EAGER)
+//	@Fetch(FetchMode.SELECT)
+//	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+//	private List<UserAccessInfo> userAccessInfo = new ArrayList<>();	//Note: this is NOT standard
+//	
 	private InstantiationState nsState;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -156,13 +162,13 @@ public class NsInfo implements DescriptorInformationElement {
 	 * @param nsdId Reference to the NSD used to instantiate this NS.
 	 * @param flavourId Reference to the flavour of the NSD used to instantiate this NS.
 	 * @param vnfInfoId Reference to information on constituent VNFs of this NS.
-	 * @param sapInfo Information on the SAPs of this NS.
 	 * @param nestedNsInfoId Reference to information on nested NSs of this NS.
 	 * @param nsState The state of the NS.
 	 * @param nsScaleStatus Represents for each NS scaling aspect declared in the applicable DF
 	 * @param additionalAffinityOrAntiAffinityRule Information on the additional affinity or anti-affinity rule from NS instantiation operation. Shall not conflict with rules already specified in the NSD. 
 	 * @param tenantId ID of the tenant the NS info belongs to
 	 * @param configurationParameters the configuration parameters provided by the user
+	 * 
 	 */
 	public NsInfo(String nsInstanceId,
 			String nsName,
@@ -170,7 +176,6 @@ public class NsInfo implements DescriptorInformationElement {
 			String nsdId,
 			String flavourId,
 			List<String> vnfInfoId, 
-			List<SapInfo> sapInfo, 
 			List<String> nestedNsInfoId, 
 			InstantiationState nsState,
 			List<NsScaleInfo> nsScaleStatus, 
@@ -183,7 +188,6 @@ public class NsInfo implements DescriptorInformationElement {
 		this.nsdId = nsdId;
 		this.flavourId = flavourId;
 		if (vnfInfoId != null) this.vnfInfoId = vnfInfoId;
-		if (sapInfo != null) this.sapInfo = sapInfo;
 		if (nestedNsInfoId != null) this.nestedNsInfoId = nestedNsInfoId;
 		this.nsState = nsState;
 		if (nsScaleStatus != null) this.nsScaleStatus = nsScaleStatus;
@@ -204,12 +208,12 @@ public class NsInfo implements DescriptorInformationElement {
 	 * @param pnfInfo Information on the PNF(s) that are part of this NS.
 	 * @param virtualLinkInfo Information on the VLs of this NS.
 	 * @param vnffgInfo Information on the VNFFGs of this NS.
-	 * @param sapInfo Information on the SAPs of this NS.
 	 * @param nestedNsInfoId Reference to information on nested NSs of this NS.
 	 * @param nsState The state of the NS.
 	 * @param nsScaleStatus Represents for each NS scaling aspect declared in the applicable DF
 	 * @param additionalAffinityOrAntiAffinityRule Information on the additional affinity or anti-affinity rule from NS instantiation operation. Shall not conflict with rules already specified in the NSD. 
 	 * @param tenantId ID of the tenant the NS info belongs to
+	 * 
 	 */
 	public NsInfo(String nsInstanceId,
 			String nsName,
@@ -220,7 +224,6 @@ public class NsInfo implements DescriptorInformationElement {
 			List<PnfInfo> pnfInfo, 
 			List<NsVirtualLinkInfo> virtualLinkInfo, 
 			List<VnffgInfo> vnffgInfo, 
-			List<SapInfo> sapInfo, 
 			List<String> nestedNsInfoId, 
 			InstantiationState nsState,
 			List<NsScaleInfo> nsScaleStatus, 
@@ -235,7 +238,6 @@ public class NsInfo implements DescriptorInformationElement {
 		if (pnfInfo != null) this.pnfInfo = pnfInfo;
 		if (virtualLinkInfo != null) this.virtualLinkInfo = virtualLinkInfo;
 		if (vnffgInfo != null) this.vnffgInfo = vnffgInfo;
-		if (sapInfo != null) this.sapInfo = sapInfo;
 		if (nestedNsInfoId != null) this.nestedNsInfoId = nestedNsInfoId;
 		this.nsState = nsState;
 		if (nsScaleStatus != null) this.nsScaleStatus = nsScaleStatus;
@@ -425,21 +427,21 @@ public class NsInfo implements DescriptorInformationElement {
 		this.nsState = nsState;
 	}
 	
-	public void addSapInfo(String sapInstanceId, String sapdId,	String sapName,	String description,	String address) {
-		this.sapInfo.add(new SapInfo(sapInstanceId, sapdId, sapName, description, address));
-	}
-	
-	public void removeSapInfo(String sapInstanceId) throws NotExistingEntityException {
-		
-		for (SapInfo s : sapInfo) {
-			if (s.getSapInstanceId().equals(sapInstanceId)) {
-				sapInfo.remove(s);
-				return;
-			}
-		}
-		throw new NotExistingEntityException("SAP info for SAP instance ID " + sapInstanceId + " not found");
-	}
-	
+//	public void addSapInfo(String sapInstanceId, String sapdId,	String sapName,	String description,	String address) {
+//		this.sapInfo.add(new SapInfo(sapInstanceId, sapdId, sapName, description, address));
+//	}
+//	
+//	public void removeSapInfo(String sapInstanceId) throws NotExistingEntityException {
+//		
+//		for (SapInfo s : sapInfo) {
+//			if (s.getSapInstanceId().equals(sapInstanceId)) {
+//				sapInfo.remove(s);
+//				return;
+//			}
+//		}
+//		throw new NotExistingEntityException("SAP info for SAP instance ID " + sapInstanceId + " not found");
+//	}
+//	
 	
 	
 	public SapInfo getSapInfoFromSapdId(String sapdId) throws NotExistingEntityException {
@@ -449,8 +451,7 @@ public class NsInfo implements DescriptorInformationElement {
 		throw new NotExistingEntityException("SAP info for SAPD ID " + sapdId + " not found");
 	}
 	
-	
-
+		
 	/**
 	 * @return the configurationParameters
 	 */
