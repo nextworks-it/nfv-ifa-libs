@@ -142,6 +142,14 @@ public class PnfInfo implements DescriptorInformationElement {
 	public String getPnfProfileId() {
 		return pnfProfileId;
 	}
+	
+	/**
+	 * @return the id
+	 */
+	@JsonIgnore
+	public Long getId() {
+		return id;
+	}
 
 	@Override
 	public void isValid() throws MalformattedElementException {
@@ -149,7 +157,7 @@ public class PnfInfo implements DescriptorInformationElement {
 		if (this.pnfdId == null) throw new MalformattedElementException("PNF info without PNFD ID");
 		if (this.pnfdInfoId == null) throw new MalformattedElementException("PNF info without PNFD info ID");
 		if (this.pnfName == null) throw new MalformattedElementException("PNF info without name");
-		if (this.pnfProfileId == null) throw new MalformattedElementException("PNF info without PNF profile ID");
+		//if (this.pnfProfileId == null) throw new MalformattedElementException("PNF info without PNF profile ID");
 		if ((this.cpInfo == null) || (this.cpInfo.isEmpty())) {
 			throw new MalformattedElementException("PNF info without CP information");
 		} else {

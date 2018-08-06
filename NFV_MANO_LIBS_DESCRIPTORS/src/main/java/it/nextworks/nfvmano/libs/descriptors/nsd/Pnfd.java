@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +27,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -66,6 +70,12 @@ public class Pnfd implements DescriptorInformationElement {
 	@Embedded
 	private SecurityParameters security;
 	
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	@ElementCollection(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private List<String> configurableProperty = new ArrayList<>();	//this is not standard
+	
 	public Pnfd() {
 		// JPA only
 	}
@@ -81,11 +91,13 @@ public class Pnfd implements DescriptorInformationElement {
 	public Pnfd(String pnfdId,
 			String provider,
 			String version,
-			SecurityParameters security) {
+			SecurityParameters security,
+			List<String> configurableProperty) {
 		this.pnfdId = pnfdId;
 		this.provider = provider;
 		this.version = version;
 		this.security = security;
+		if (configurableProperty != null) this.configurableProperty = configurableProperty;
 	}
 	
 	
@@ -135,6 +147,14 @@ public class Pnfd implements DescriptorInformationElement {
 	@JsonProperty("security")
 	public SecurityParameters getSecurity() {
 		return security;
+	}
+	
+	/**
+	 * @return the configurableProperty
+	 */
+	@JsonProperty("configurableProperty")
+	public List<String> getConfigurableProperty() {
+		return configurableProperty;
 	}
 
 	@Override
