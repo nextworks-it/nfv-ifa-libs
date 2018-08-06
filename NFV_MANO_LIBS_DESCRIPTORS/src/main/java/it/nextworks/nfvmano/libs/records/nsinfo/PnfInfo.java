@@ -75,7 +75,7 @@ public class PnfInfo implements DescriptorInformationElement {
 	 * @param nsInfo NS info this element belongs to
 	 * @param pnfId Identifier of the PNF. Assigned by OSS and provided to NFVO.
 	 * @param pnfName Human readable name of the PNF.
-	 * @param pfndId Identifier of the PNFD.
+	 * @param pnfdId Identifier of the PNFD.
 	 * @param pnfdInfoId Identifier of (reference to) the PNFD information related to this PNF.
 	 * @param pnfProfileId Identifier of (reference to) the PNF Profile to be used for this PNF.
 	 * @param cpInfo Information on the external CP of the PNF.

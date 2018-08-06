@@ -82,6 +82,7 @@ public class SapInfo implements DescriptorInformationElement {
 	 * @param sapName Human readable name for the SAP.
 	 * @param description Human readable description for the SAP.
 	 * @param address Address for this SAP. In some cases, the NFVO provides the address.
+	 * @param userAccessInfo User Access Info 
 	 */
 	public SapInfo(NsInfo nsInfo,
 			String sapInstanceId,
