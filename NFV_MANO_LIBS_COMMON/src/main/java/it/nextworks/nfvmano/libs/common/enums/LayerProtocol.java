@@ -22,6 +22,15 @@ public enum LayerProtocol {
 	ODU2,
 	IPV4,
 	IPV6,
-	PSEUDO_WIRE
+	PSEUDO_WIRE,
 	
+	//Extended for optical
+	OTSIA,
+	OCH,
+	OTU,
+	ODU,
+	SDM,
+	
+	//To handle old cases
+	NOT_SPECIFIED
 }
