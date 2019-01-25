@@ -62,6 +62,10 @@ public class NsVirtualLinkConnectivity implements DescriptorInformationElement {
 	@ManyToOne
 	private PnfProfile pnfProfile;
 	
+	@JsonIgnore
+	@ManyToOne
+	private NsProfile nsProfile;	//added since v2.4.1
+	
 	private String virtualLinkProfileId;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -104,6 +108,20 @@ public class NsVirtualLinkConnectivity implements DescriptorInformationElement {
 		if (cpdId != null) this.cpdId = cpdId;
 	}
 	
+	/**
+	 * Constructor
+	 * 
+	 * @param nsProfile the NS profile this element belongs to
+	 * @param virtualLinkProfileId Reference an NS VL profile.
+	 * @param cpdId References the descriptor of a CP on a VNF/PNF or a SAP which connects to VLs instantiated from the profile identified by the virtualLinkProfileId
+	 */
+	public NsVirtualLinkConnectivity(NsProfile nsProfile,
+			String virtualLinkProfileId,
+			List<String> cpdId) {
+		this.nsProfile = nsProfile;
+		this.virtualLinkProfileId = virtualLinkProfileId;
+		if (cpdId != null) this.cpdId = cpdId;
+	}
 	
 
 	/**

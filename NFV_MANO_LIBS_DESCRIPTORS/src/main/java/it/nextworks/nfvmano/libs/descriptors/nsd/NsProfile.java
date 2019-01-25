@@ -18,16 +18,22 @@ package it.nextworks.nfvmano.libs.descriptors.nsd;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -72,6 +78,12 @@ public class NsProfile implements DescriptorInformationElement {
 	@Fetch(FetchMode.SELECT)
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<String> affinityOrAntiaffinityGroupId = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "nsProfile", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity = new ArrayList<>();
+	
 	
 	public NsProfile() {
 		// JPA only
@@ -165,12 +177,25 @@ public class NsProfile implements DescriptorInformationElement {
 	public List<String> getAffinityOrAntiaffinityGroupId() {
 		return affinityOrAntiaffinityGroupId;
 	}
+	
+	/**
+	 * @return the nsVirtualLinkConnectivity
+	 */
+	@JsonProperty("nsVirtualLinkConnectivity")
+	public List<NsVirtualLinkConnectivity> getNsVirtualLinkConnectivity() {
+		return nsVirtualLinkConnectivity;
+	}
 
 	@Override
 	public void isValid() throws MalformattedElementException {
 		if (this.nsProfileId == null) throw new MalformattedElementException("NS profile without ID");
 		if (this.nsdId == null) throw new MalformattedElementException("NS profile without NSD ID");
 		if (this.nsDeploymentFlavourId == null) throw new MalformattedElementException("NS profile without NS DF ID");
+		if ((this.nsVirtualLinkConnectivity == null) || (this.nsVirtualLinkConnectivity.isEmpty())) { 
+			throw new MalformattedElementException("NS profile without NS VL connectivity");
+		} else {
+			for (NsVirtualLinkConnectivity vlc : this.nsVirtualLinkConnectivity) vlc.isValid();
+		}
 	}
 
 }

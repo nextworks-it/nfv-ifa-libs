@@ -66,7 +66,7 @@ import it.nextworks.nfvmano.libs.monit.interfaces.messages.QueryThresholdRespons
  * must be implemented by the VNFM monitoring service and invoked by the 
  * NFVO (or a plugin that handles the external if of the VNFM).
  * 
- * REF IFA 007 v2.3.1 - 7.4 --> This if implements the provider side and it
+ * REF IFA 005 v2.3.1 - 7.7 --> This if implements the provider side and it
  * must be implemented by the VIM monitoring service and invoked by the 
  * NFVO. 
  * 
