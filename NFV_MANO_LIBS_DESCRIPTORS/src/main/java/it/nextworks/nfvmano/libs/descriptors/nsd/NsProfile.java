@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.descriptors.nsd;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -101,15 +102,19 @@ public class NsProfile implements DescriptorInformationElement {
 	 * @param minNumberOfInstances Minimum number of nested NS instances based on the referenced NSD that is permitted to exist for this NsProfile.
 	 * @param maxNumberOfInstances Maximum number of nested NS instances based on the referenced NSD that is permitted to exist for this NsProfile.
 	 * @param affinityOrAntiaffinityGroupId Identifies an affinity or anti-affinity group the NSs created according to this NsProfile belong to.
+	 * @param nsVirtualLinkConnectivity Describes the connectivity of the NS this NS profile describes with the vLinks
 	 */
-	public NsProfile(NsDf nsDf,
+	public NsProfile(
+			NsDf nsDf,
 			String nsProfileId,
 			String nsdId,
 			String nsDfId,
 			String nsInstantiationLevelId,
 			int minNumberOfInstances,
 			int maxNumberOfInstances,
-			List<String> affinityOrAntiaffinityGroupId) {
+			List<String> affinityOrAntiaffinityGroupId,
+			List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity
+	) {
 		this.nsDf = nsDf;
 		this.nsProfileId = nsProfileId;
 		this.nsdId = nsdId;
@@ -117,10 +122,45 @@ public class NsProfile implements DescriptorInformationElement {
 		this.nsInstantiationLevelId = nsInstantiationLevelId;
 		this.minNumberOfInstances = minNumberOfInstances;
 		this.maxNumberOfInstances = maxNumberOfInstances;
+		if (nsVirtualLinkConnectivity != null) this.nsVirtualLinkConnectivity = nsVirtualLinkConnectivity;
 		if (affinityOrAntiaffinityGroupId != null) this.affinityOrAntiaffinityGroupId = affinityOrAntiaffinityGroupId;
 	}
-	
-	
+
+	/**
+	 * Constructor
+	 *
+	 *
+	 * @param nsDf NS deployment flavour this NS profile refers to
+	 * @param nsProfileId Identifies an NS profile
+	 * @param nsdId Identifies the NSD applicable to NS instantiated according to this profile
+	 * @param nsDfId Identifies the applicable network service DF within the scope of the NSD.
+	 * @param nsInstantiationLevelId Identifies the NS level within the referenced NS DF to be used in the context of the parent NS instantiation. If not present, the default NS instantiation level as declared in the referenced NSD shall be used.
+	 * @param minNumberOfInstances Minimum number of nested NS instances based on the referenced NSD that is permitted to exist for this NsProfile.
+	 * @param maxNumberOfInstances Maximum number of nested NS instances based on the referenced NSD that is permitted to exist for this NsProfile.
+	 * @param affinityOrAntiaffinityGroupId Identifies an affinity or anti-affinity group the NSs created according to this NsProfile belong to.
+	 */
+	public NsProfile(
+			NsDf nsDf,
+			String nsProfileId,
+			String nsdId,
+			String nsDfId,
+			String nsInstantiationLevelId,
+			int minNumberOfInstances,
+			int maxNumberOfInstances,
+			List<String> affinityOrAntiaffinityGroupId
+	) {
+		this(
+				nsDf,
+				nsProfileId,
+				nsdId,
+				nsDfId,
+				nsInstantiationLevelId,
+				minNumberOfInstances,
+				maxNumberOfInstances,
+				affinityOrAntiaffinityGroupId,
+				Collections.emptyList()
+		);
+	}
 
 	/**
 	 * @return the nsProfileId
