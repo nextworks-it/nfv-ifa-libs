@@ -71,6 +71,7 @@ public class AddressData implements DescriptorInformationElement {
 		this.iPAddressAssignment = iPAddressAssignment;
 		this.floatingIpActivated = floatingIpActivated;
 		this.iPAddressType = iPAddressType;
+		this.management = management;
 		this.numberOfIpAddress = numberOfIpAddress;
 	}
 	
