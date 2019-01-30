@@ -31,7 +31,7 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 public class VnfLocationConstraints implements InterfaceInformationElement {
 
 	private String vnfProfileId;
-	private String locationConstraints;
+	private LocationInfo locationConstraints;	//the format is not standard
 	
 	public VnfLocationConstraints() {	}
 	
@@ -41,7 +41,7 @@ public class VnfLocationConstraints implements InterfaceInformationElement {
 	 * @param vnfProfileId Identifier (reference to) of a VnfProfile in the NSD used to manage the lifecycle of the VNF instance.
 	 * @param locationConstraints Defines the location constraints for the VNF instance to be created.
 	 */
-	public VnfLocationConstraints(String vnfProfileId, String locationConstraints) {
+	public VnfLocationConstraints(String vnfProfileId, LocationInfo locationConstraints) {
 		this.vnfProfileId = vnfProfileId;
 		this.locationConstraints = locationConstraints;
 	}
@@ -58,7 +58,7 @@ public class VnfLocationConstraints implements InterfaceInformationElement {
 	/**
 	 * @return the locationConstraints
 	 */
-	public String getLocationConstraints() {
+	public LocationInfo getLocationConstraints() {
 		return locationConstraints;
 	}
 
@@ -66,6 +66,7 @@ public class VnfLocationConstraints implements InterfaceInformationElement {
 	public void isValid() throws MalformattedElementException {
 		if (this.vnfProfileId == null) throw new MalformattedElementException("VNF location constraints without VNF profile ID");
 		if (this.locationConstraints == null) throw new MalformattedElementException("VNF location constraints without constraints");
+		else this.locationConstraints.isValid();
 	}
 
 }
