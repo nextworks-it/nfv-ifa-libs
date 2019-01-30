@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,6 +39,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
+import it.nextworks.nfvmano.libs.common.elements.QoS;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.descriptors.common.elements.Rule;
 
@@ -78,6 +80,10 @@ public class Nfpd implements DescriptorInformationElement {
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<String> cpd = new ArrayList<>();
 	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@Embedded
+	private QoS qos;		//This is an extensions to the standard
+	
 	public Nfpd() {
 		// JPA only
 	}
@@ -89,15 +95,18 @@ public class Nfpd implements DescriptorInformationElement {
 	 * @param nfpId Identifies this nfpd information element within a VNFFGD.
 	 * @param nfpRule Provides an NFP classification and selection rule. The rule may be expressed as a criteria constructed out of atomic assertions linked by Boolean operators AND, OR and NOT. Examples of atomic assertions are assertions on packet header fields’ values, date and time ranges, etc.
 	 * @param cpd References the descriptor of a connection point to be traversed by the traffic flows matching the criteria. When multiple values are provided, the order is significant and specifies the sequence of connection points to be traversed
+	 * @param qos QoS to represent the e2e delay across a VNF path.
 	 */
 	public Nfpd(Vnffgd fg,
 			String nfpId,
 			Rule nfpRule,
-			List<String> cpd) {
+			List<String> cpd,
+			QoS qos) {
 		this.fg  = fg;
 		this.nfpId = nfpId;
 		this.nfpRule = nfpRule;
 		if (cpd != null) this.cpd = cpd;
+		this.qos = qos;
 	}
 	
 	/**
@@ -106,13 +115,16 @@ public class Nfpd implements DescriptorInformationElement {
 	 * @param fg NS forwarding graph this nfpd belongs to
 	 * @param nfpId Identifies this nfpd information element within a VNFFGD.
 	 * @param cpd References the descriptor of a connection point to be traversed by the traffic flows matching the criteria. When multiple values are provided, the order is significant and specifies the sequence of connection points to be traversed
+	 * @param qos QoS to represent the e2e delay across a VNF path.
 	 */
 	public Nfpd(Vnffgd fg,
 			String nfpId,
-			List<String> cpd) {
+			List<String> cpd,
+			QoS qos) {
 		this.fg  = fg;
 		this.nfpId = nfpId;
 		if (cpd != null) this.cpd = cpd;
+		this.qos = qos;
 	}
 	
 	
@@ -140,6 +152,16 @@ public class Nfpd implements DescriptorInformationElement {
 	public List<String> getCpd() {
 		return cpd;
 	}
+	
+	
+
+	/**
+	 * @return the qos
+	 */
+	@JsonProperty("qos")
+	public QoS getQos() {
+		return qos;
+	}
 
 	@Override
 	public void isValid() throws MalformattedElementException {
@@ -148,6 +170,7 @@ public class Nfpd implements DescriptorInformationElement {
 		if ((this.cpd == null) || (this.cpd.isEmpty())) {
 			throw new MalformattedElementException("NFDP without CPD");
 		}
+		if (this.qos != null) this.qos.isValid();
 	}
 
 }

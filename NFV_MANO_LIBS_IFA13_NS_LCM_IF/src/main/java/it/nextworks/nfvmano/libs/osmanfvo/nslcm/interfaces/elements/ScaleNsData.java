@@ -23,6 +23,7 @@ import java.util.Map;
 
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
+import it.nextworks.nfvmano.libs.descriptors.nsd.ScaleNsToLevelData;
 
 /**
  * The ScaleNsData information element describes the information needed to scale an NS instance 

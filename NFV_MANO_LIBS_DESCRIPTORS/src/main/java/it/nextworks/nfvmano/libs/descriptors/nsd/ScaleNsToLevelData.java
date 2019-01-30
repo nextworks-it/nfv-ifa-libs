@@ -13,11 +13,28 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package it.nextworks.nfvmano.libs.osmanfvo.nslcm.interfaces.elements;
+package it.nextworks.nfvmano.libs.descriptors.nsd;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
@@ -37,9 +54,26 @@ import it.nextworks.nfvmano.libs.records.nsinfo.NsScaleInfo;
  * @author nextworks
  *
  */
+@Entity
 public class ScaleNsToLevelData implements InterfaceInformationElement {
 
+	@Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
+	
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@JsonIgnore
+	@JoinColumn(name="autoscaling_action_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	private AutoscalingAction action;
+	
 	private String nsInstantiationLevel;
+	
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	@ElementCollection(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<NsScaleInfo> nsScaleInfo = new ArrayList<>();
 	
 	/**
@@ -54,7 +88,27 @@ public class ScaleNsToLevelData implements InterfaceInformationElement {
 		this.nsInstantiationLevel = nsInstantiationLevel;
 	}
 	
-	public ScaleNsToLevelData() {	}
+	/**
+	 * Constructor
+	 * 
+	 * @param action Autoscaling action this element belongs to.
+	 * @param nsInstantiationLevel Identifier of the target NS instantiation level of the current DF to which the NS instance is requested to be scaled.
+	 * @param nsScaleInfo For each NS scaling aspect of the current DF, defines the target NS scale level to which the NS instance is to be scaled.
+	 */
+	public ScaleNsToLevelData(AutoscalingAction action,
+			String nsInstantiationLevel,
+			List<NsScaleInfo> nsScaleInfo) {
+		this.action = action;
+		if (nsScaleInfo != null) this.nsScaleInfo = nsScaleInfo;
+		this.nsInstantiationLevel = nsInstantiationLevel;
+	}
+	
+	/**
+	 * Default constructor
+	 */
+	public ScaleNsToLevelData() { 
+		//JPA only
+	}
 
 	
 	
