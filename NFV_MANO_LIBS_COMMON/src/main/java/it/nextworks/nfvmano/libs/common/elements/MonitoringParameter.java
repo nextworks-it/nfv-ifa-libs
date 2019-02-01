@@ -65,7 +65,7 @@ public class MonitoringParameter implements DescriptorInformationElement {
 	/**
 	 * @return the monitoringParameterId
 	 */
-	@JsonProperty("monitoringParamaterId")
+	@JsonProperty("monitoringParameterId")
 	public String getMonitoringParameterId() {
 		return monitoringParameterId;
 	}

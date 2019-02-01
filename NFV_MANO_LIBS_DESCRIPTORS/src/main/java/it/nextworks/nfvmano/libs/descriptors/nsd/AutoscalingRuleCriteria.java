@@ -35,12 +35,14 @@ public class AutoscalingRuleCriteria implements DescriptorInformationElement {
 	
 	private String name;
 	
-	private int scaleInThreshold;
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+	private Integer scaleInThreshold;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private RelationalOperation scaleInRelationalOperation;
 	
-	private int scaleOutThreshold;
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+	private Integer scaleOutThreshold;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private RelationalOperation scaleOutRelationalOperation;
@@ -64,9 +66,9 @@ public class AutoscalingRuleCriteria implements DescriptorInformationElement {
 	 */
 	public AutoscalingRuleCriteria(AutoscalingRuleCondition condition,
 			String name,
-			int scaleInThreshold,
+			Integer scaleInThreshold,
 			RelationalOperation scaleInRelationalOperation,
-			int scaleOutThreshould,
+			Integer scaleOutThreshould,
 			RelationalOperation scaleOutRelationalOperation,
 			String nsMonitoringParamRef) {
 		this.condition = condition;
@@ -90,7 +92,7 @@ public class AutoscalingRuleCriteria implements DescriptorInformationElement {
 	/**
 	 * @return the scaleInThreshold
 	 */
-	public int getScaleInThreshold() {
+	public Integer getScaleInThreshold() {
 		return scaleInThreshold;
 	}
 
@@ -104,7 +106,7 @@ public class AutoscalingRuleCriteria implements DescriptorInformationElement {
 	/**
 	 * @return the scaleOutThreshold
 	 */
-	public int getScaleOutThreshold() {
+	public Integer getScaleOutThreshold() {
 		return scaleOutThreshold;
 	}
 

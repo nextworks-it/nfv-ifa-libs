@@ -46,7 +46,6 @@ import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.common.exceptions.NotExistingEntityException;
 import it.nextworks.nfvmano.libs.descriptors.common.elements.LifeCycleManagementScript;
-import it.nextworks.nfvmano.libs.descriptors.common.elements.Rule;
 import it.nextworks.nfvmano.libs.descriptors.common.elements.VirtualLinkProfile;
 import it.nextworks.nfvmano.libs.records.nsinfo.UserAccessInfo;
 
@@ -118,7 +117,7 @@ public class Nsd implements DescriptorInformationElement {
 	@OneToMany(mappedBy = "nsd", cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Rule> autoScalingRule = new ArrayList<>();
+	private List<NsAutoscalingRule> autoScalingRule = new ArrayList<>();
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@OneToMany(mappedBy = "nsd", cascade=CascadeType.ALL)
@@ -203,7 +202,7 @@ public class Nsd implements DescriptorInformationElement {
 			List<NsVirtualLinkDesc> virtualLinkDesc,
 			List<Vnffgd> vnffgd,
 			List<MonitoredData> monitoredInfo,
-			List<Rule> autoScalingRule,
+			List<NsAutoscalingRule> autoScalingRule,
 			List<LifeCycleManagementScript> lifeCycleManagementScript,
 			List<NsDf> nsDf,
 			SecurityParameters security) {
@@ -334,7 +333,7 @@ public class Nsd implements DescriptorInformationElement {
 	 * @return the autoScalingRule
 	 */
 	@JsonProperty("autoScalingRule")
-	public List<Rule> getAutoScalingRule() {
+	public List<NsAutoscalingRule> getAutoScalingRule() {
 		return autoScalingRule;
 	}
 
@@ -383,7 +382,7 @@ public class Nsd implements DescriptorInformationElement {
 			for (MonitoredData mi : this.monitoredInfo) mi.isValid();
 		}
 		if (this.autoScalingRule != null) {
-			for (Rule rule : this.autoScalingRule) rule.isValid();
+			for (NsAutoscalingRule rule : this.autoScalingRule) rule.isValid();
 		}
 		if ((this.nsDf == null) || (this.nsDf.isEmpty())) {
 			throw new MalformattedElementException("NSD without deployment flavour");
