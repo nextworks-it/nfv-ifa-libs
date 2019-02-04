@@ -83,6 +83,7 @@ public class NsProfile implements DescriptorInformationElement {
 	@OneToMany(mappedBy = "nsProfile", cascade=CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity = new ArrayList<>();
 	
 	
@@ -231,9 +232,7 @@ public class NsProfile implements DescriptorInformationElement {
 		if (this.nsProfileId == null) throw new MalformattedElementException("NS profile without ID");
 		if (this.nsdId == null) throw new MalformattedElementException("NS profile without NSD ID");
 		if (this.nsDeploymentFlavourId == null) throw new MalformattedElementException("NS profile without NS DF ID");
-		if ((this.nsVirtualLinkConnectivity == null) || (this.nsVirtualLinkConnectivity.isEmpty())) { 
-			throw new MalformattedElementException("NS profile without NS VL connectivity");
-		} else {
+		if (this.nsVirtualLinkConnectivity != null) {
 			for (NsVirtualLinkConnectivity vlc : this.nsVirtualLinkConnectivity) vlc.isValid();
 		}
 	}
