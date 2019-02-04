@@ -15,6 +15,7 @@ public class LocationInfo implements InterfaceInformationElement {
 	private double longitude;
 	private float altitude;  //It could be int (or omitted)
 
+	public LocationInfo() { }
 
 	/**
 	 * Constructor
