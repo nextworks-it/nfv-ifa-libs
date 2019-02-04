@@ -32,6 +32,7 @@ public class SapData implements InterfaceInformationElement {
 	private String sapName;
 	private String description;
 	private String address;
+	private LocationInfo locationInfo;
 	
 	public SapData() {	}
 	
@@ -42,15 +43,15 @@ public class SapData implements InterfaceInformationElement {
 	 * @param sapName Human readable name for the SAP.
 	 * @param description Human readable description for the SAP.
 	 * @param address Address for this SAP.
+	 * @param locationInfo Location for this SAP.
 	 */
-	public SapData(String sapdId, String sapName, String description, String address) {
+	public SapData(String sapdId, String sapName, String description, String address, LocationInfo locationInfo) {
 		this.sapdId = sapdId;
 		this.sapName = sapName;
 		this.description = description;
 		this.address = address;
+		this.locationInfo = locationInfo;  //This is an extensions to the standard
 	}
-	
-	
 
 	/**
 	 * @return the sapId
@@ -79,6 +80,11 @@ public class SapData implements InterfaceInformationElement {
 	public String getAddress() {
 		return address;
 	}
+
+	/**
+	 * @return the locationInfo
+	 */
+	public LocationInfo getLocationInfo() { return locationInfo; }
 
 	@Override
 	public void isValid() throws MalformattedElementException {
