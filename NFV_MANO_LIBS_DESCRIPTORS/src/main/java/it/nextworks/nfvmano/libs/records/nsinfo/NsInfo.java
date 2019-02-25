@@ -148,6 +148,10 @@ public class NsInfo implements DescriptorInformationElement {
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<AffinityRule> additionalAffinityOrAntiAffinityRule = new ArrayList<>();
 	
+	//This is not standard
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private String monitoringDashboardUrl;
+	
 	
 	public NsInfo() {
 		// TODO Auto-generated constructor stub
@@ -427,6 +431,8 @@ public class NsInfo implements DescriptorInformationElement {
 		this.nsState = nsState;
 	}
 	
+	
+	
 //	public void addSapInfo(String sapInstanceId, String sapdId,	String sapName,	String description,	String address) {
 //		this.sapInfo.add(new SapInfo(sapInstanceId, sapdId, sapName, description, address));
 //	}
@@ -444,6 +450,20 @@ public class NsInfo implements DescriptorInformationElement {
 //	
 	
 	
+	/**
+	 * @return the monitoringDashboardUrl
+	 */
+	public String getMonitoringDashboardUrl() {
+		return monitoringDashboardUrl;
+	}
+
+	/**
+	 * @param monitoringDashboardUrl the monitoringDashboardUrl to set
+	 */
+	public void setMonitoringDashboardUrl(String monitoringDashboardUrl) {
+		this.monitoringDashboardUrl = monitoringDashboardUrl;
+	}
+
 	public SapInfo getSapInfoFromSapdId(String sapdId) throws NotExistingEntityException {
 		for (SapInfo s : sapInfo) {
 			if (s.getSapdId().equals(sapdId)) return s;
