@@ -4,7 +4,7 @@ import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
 /**
- * Location Info in terms of [Latitude, Longitude, Altitude]
+ * Location Info in terms of [Latitude, Longitude, Altitude, Range]
  *
  * @author nextworks
  *
@@ -14,6 +14,7 @@ public class LocationInfo implements InterfaceInformationElement {
 	private double latitude;
 	private double longitude;
 	private float altitude;  //It could be int (or omitted)
+	private float range;
 
 	public LocationInfo() { }
 
@@ -23,11 +24,13 @@ public class LocationInfo implements InterfaceInformationElement {
 	 * @param latitude	Latitude of the element.
 	 * @param longitude Longitude of the element.
 	 * @param altitude  Altitude of the element.
+	 * @param range Range (coverage) of the element.
 	 */
-	public LocationInfo(double latitude, double longitude, float altitude) {
+	public LocationInfo(double latitude, double longitude, float altitude, float range) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.altitude = altitude;
+		this.range = range;
 	}
 
 	/**
@@ -49,6 +52,14 @@ public class LocationInfo implements InterfaceInformationElement {
 	 */
 	public float getAltitude() {
 		return altitude;
+	}
+
+	/**
+	 *
+	 * @return the range
+	 */
+	public float getRange() {
+		return range;
 	}
 
 	@Override
