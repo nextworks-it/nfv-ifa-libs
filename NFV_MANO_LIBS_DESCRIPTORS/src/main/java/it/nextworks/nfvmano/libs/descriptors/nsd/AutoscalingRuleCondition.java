@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -39,8 +42,10 @@ public class AutoscalingRuleCondition implements DescriptorInformationElement {
     @JsonIgnore
     private Long id;
 	
-	@JsonIgnore
-	@ManyToOne
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    @JoinColumn(name = "rule_conditions_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
 	private NsAutoscalingRule rule;
 	
 	private String name;

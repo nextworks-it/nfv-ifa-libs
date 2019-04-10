@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -43,11 +45,9 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 	
 	private String ruleId;
 	
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	@OneToMany(mappedBy = "rule", cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, mappedBy = "rule", cascade=CascadeType.ALL, orphanRemoval=true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<AutoscalingRuleCondition> ruleConditions = new ArrayList<>();
+	private AutoscalingRuleCondition ruleConditions;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@OneToMany(mappedBy = "rule", cascade=CascadeType.ALL)
@@ -77,7 +77,7 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 	/**
 	 * @return the ruleConditions
 	 */
-	public List<AutoscalingRuleCondition> getRuleConditions() {
+	public AutoscalingRuleCondition getRuleConditions() {
 		return ruleConditions;
 	}
 
@@ -91,9 +91,9 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {
 		if (ruleId == null) throw new MalformattedElementException("Autoscaling rule without ID");
-		if ((this.ruleConditions == null) || (this.ruleConditions.isEmpty())) 
+		if (this.ruleConditions == null) 
 			throw new MalformattedElementException("Autoscaling rule without conditions"); 
-			else for (AutoscalingRuleCondition arc : ruleConditions) arc.isValid();
+			else ruleConditions.isValid();
 		if ((this.ruleActions == null) || (this.ruleActions.isEmpty())) 
 			throw new MalformattedElementException("Autoscaling rule without actions"); 
 			else for (AutoscalingAction aa : ruleActions) aa.isValid();
