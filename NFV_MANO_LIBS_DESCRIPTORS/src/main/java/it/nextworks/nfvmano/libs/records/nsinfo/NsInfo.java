@@ -414,7 +414,14 @@ public class NsInfo implements DescriptorInformationElement {
 		return vnfInfoMap;
 	}
 	
-	
+	@JsonIgnore
+	public List<String> getVnfInfoIdFromVnfdId(String vnfdId) {
+		List<String> infoIds = new ArrayList<>();
+		for (Map.Entry<String, String> e : vnfInfoVnfdIdMap.entrySet()) {
+			if (e.getValue().equals(vnfdId)) infoIds.add(e.getKey());
+		}
+		return infoIds;
+	}
 
 	/**
 	 * @return the vnfInfoVnfdIdMap

@@ -130,6 +130,9 @@ public class InstantiatedVnfInfo implements DescriptorInformationElement {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<VirtualStorageResourceInfo> virtualStorageResourceInfo = new ArrayList<>();
 	
+	@JsonIgnore
+	private String managementIp;
+	
 	public InstantiatedVnfInfo() {
 		// JPA only
 	}
@@ -295,6 +298,24 @@ public class InstantiatedVnfInfo implements DescriptorInformationElement {
 		}
 		if (result.isEmpty()) throw new NotExistingEntityException("VNFC for VDU " + vduId + " not found in instantiated VNF info");
 		return result;
+	}
+	
+	
+
+	/**
+	 * @return the managementIp
+	 */
+	@JsonIgnore
+	public String getManagementIp() {
+		return managementIp;
+	}
+
+	/**
+	 * @param managementIp the managementIp to set
+	 */
+	@JsonIgnore
+	public void setManagementIp(String managementIp) {
+		this.managementIp = managementIp;
 	}
 
 	@Override
