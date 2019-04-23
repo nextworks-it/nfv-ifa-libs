@@ -438,6 +438,19 @@ public class NsInfo implements DescriptorInformationElement {
 		this.nsState = nsState;
 	}
 	
+	/**
+	 * Set the NS instantiation level
+	 * 	
+	 * @param instantiationLevelId ID of the current NS instantiation level
+	 */
+	@JsonIgnore
+	public void setInstantiationLevel(String instantiationLevelId) {
+		NsScaleInfo nsScaleInfoItem = new NsScaleInfo(null, instantiationLevelId);
+		List<NsScaleInfo> nsScaleInfo = new ArrayList<>();
+		nsScaleInfo.add(nsScaleInfoItem);
+		this.nsScaleStatus = nsScaleInfo;
+	}
+	
 	
 	
 //	public void addSapInfo(String sapInstanceId, String sapdId,	String sapName,	String description,	String address) {
