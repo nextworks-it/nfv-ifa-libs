@@ -1,5 +1,9 @@
 package it.nextworks.nfvmano.libs.osmanfvo.nslcm.interfaces.elements;
 
+import javax.persistence.Embeddable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
@@ -9,6 +13,7 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
  * @author nextworks
  *
  */
+@Embeddable
 public class LocationInfo implements InterfaceInformationElement {
 
 	private double latitude;
@@ -65,6 +70,12 @@ public class LocationInfo implements InterfaceInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {
 		// Nothing to do.
+	}
+	
+	@JsonIgnore
+	public boolean isMeaningful() {
+		if ((latitude != 0) && (longitude != 0)) return true;
+		return false;
 	}
 
 }
