@@ -107,8 +107,17 @@ public class PolicyInfo implements InterfaceInformationElement {
     public ActivationStatus getActivationStatus() {
         return activationStatus;
     }
+    
+    
 
-    @Override
+    /**
+	 * @param activationStatus the activationStatus to set
+	 */
+	public void setActivationStatus(ActivationStatus activationStatus) {
+		this.activationStatus = activationStatus;
+	}
+
+	@Override
     public void isValid() throws MalformattedElementException {
         if (this.policyInfoId == null) throw new MalformattedElementException("PolicyInfo without policyInfoId");
         if (this.designer == null) throw new MalformattedElementException("PolicyInfo without designer");
