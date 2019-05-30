@@ -1,5 +1,12 @@
 package it.nextworks.nfvmano.libs.policy.elements;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.policy.enums.ActivationStatus;
@@ -7,19 +14,27 @@ import it.nextworks.nfvmano.libs.policy.enums.ActivationStatus;
 /**
  * The PolicyInfo element defines policy related information
  *
- * REF IFA 013 v3.1.1 - 8.8.2.2
+ * REF IFA 013 v3.2.1 - 8.8.2.2
  *
  * @author nextworks
  *
  */
-
+@Entity
 public class PolicyInfo implements InterfaceInformationElement {
 
+	@Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
+	
     private String policyInfoId;
     private String designer;
     private String name;
     private String version;
+    
+    @Embedded
     private Policy policy;
+    
     private ActivationStatus activationStatus;
 
     public PolicyInfo() { }

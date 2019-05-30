@@ -1,5 +1,7 @@
 package it.nextworks.nfvmano.libs.policy.elements;
 
+import javax.persistence.Embeddable;
+
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 import it.nextworks.nfvmano.libs.policy.enums.PolicyType;
@@ -12,7 +14,7 @@ import it.nextworks.nfvmano.libs.policy.enums.PolicyValue;
  * @author nextworks
  *
  */
-
+@Embeddable
 public class Policy implements InterfaceInformationElement {
 
     private PolicyType policyType;
