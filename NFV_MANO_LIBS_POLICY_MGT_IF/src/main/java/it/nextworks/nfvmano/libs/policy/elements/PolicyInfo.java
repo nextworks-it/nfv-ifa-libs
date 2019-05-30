@@ -116,6 +116,22 @@ public class PolicyInfo implements InterfaceInformationElement {
 	public void setActivationStatus(ActivationStatus activationStatus) {
 		this.activationStatus = activationStatus;
 	}
+	
+	
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param policyInfoId the policyInfoId to set
+	 */
+	public void setPolicyInfoId(String policyInfoId) {
+		this.policyInfoId = policyInfoId;
+	}
 
 	@Override
     public void isValid() throws MalformattedElementException {

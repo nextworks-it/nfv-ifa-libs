@@ -54,6 +54,8 @@ public class Filter {
 	//VSD_ID
 	//VSI_ID
 	//TENANT_ID
+	//POLICY_ID
+	//POLICY_STATUS
 	private Map<String,String> parameters = new HashMap<>();
 	
 	public Filter() {}
