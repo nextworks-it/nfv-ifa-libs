@@ -20,7 +20,6 @@
       <module>NFV_MANO_LIBS_SW_IMAGES_IF</module>
       <module>NFV_MANO_LIBS_IFA05_VR_MGT_IF</module>
       <module>NFV_MANO_LIBS_POLICY_MGT_IF</module>
-      <module>NFV_MANO_LIBS_SLICER_IF</module>
     </modules>
 </project>
 
