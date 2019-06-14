@@ -23,6 +23,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import it.nextworks.nfvmano.libs.common.InterfaceMessage;
 import it.nextworks.nfvmano.libs.common.elements.AffinityRule;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
@@ -43,25 +44,34 @@ public class InstantiateNsRequest implements InterfaceMessage {
 
 	private String nsInstanceId;
 	private String flavourId;
-	
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<SapData> sapData = new ArrayList<>();
-	
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<PnfInfo> pnfInfo = new ArrayList<>();
-	
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<VnfInstanceData> vnfInstanceData = new ArrayList<>();
-	
-	private List<String> nestedNsInstanceId;
-	
-	private List<VnfLocationConstraints> locationConstraints;
-	
-	private Map<String, String> additionalParamForNs = new HashMap<String, String>();
-	
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<String> nestedNsInstanceId = new ArrayList<>();
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<VnfLocationConstraints> locationConstraints = new ArrayList<>();
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private Map<String, String> additionalParamForNs = new HashMap<>();
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<ParamsForVnf> additionalParamForVnf = new ArrayList<>();
-	
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date startTime;
 	
 	private String nsInstantiationLevelId;
-	
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<AffinityRule> additionalAffinityOrAntiAffinityRule = new ArrayList<>();
 	
 	public InstantiateNsRequest() {
