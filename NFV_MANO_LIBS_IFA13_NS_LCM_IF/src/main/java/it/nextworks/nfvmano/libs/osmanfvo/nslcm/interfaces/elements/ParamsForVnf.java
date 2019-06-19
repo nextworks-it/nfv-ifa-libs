@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
@@ -31,7 +32,10 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
  */
 public class ParamsForVnf implements InterfaceInformationElement {
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String vnfProfileId;
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, String> additionalParam = new HashMap<>();
 	
 	public ParamsForVnf() {	}

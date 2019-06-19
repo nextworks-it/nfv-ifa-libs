@@ -25,6 +25,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -58,11 +59,14 @@ public class PnfInfo implements DescriptorInformationElement {
 	private String pnfName;
 	private String pnfdId;
 	private String pnfdInfoId;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String pnfProfileId;
 	
 	@ElementCollection(fetch=FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<PnfExtCpInfo> cpInfo = new ArrayList<>();
 	
 	public PnfInfo() {

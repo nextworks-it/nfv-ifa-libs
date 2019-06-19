@@ -68,7 +68,8 @@ public class InstantiateNsRequest implements InterfaceMessage {
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private Date startTime;
-	
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String nsInstantiationLevelId;
 
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)

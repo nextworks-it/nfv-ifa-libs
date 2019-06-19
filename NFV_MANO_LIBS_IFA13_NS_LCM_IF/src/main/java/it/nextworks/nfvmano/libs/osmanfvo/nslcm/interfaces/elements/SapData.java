@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.osmanfvo.nslcm.interfaces.elements;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
@@ -31,7 +32,11 @@ public class SapData implements InterfaceInformationElement {
 	private String sapdId; 
 	private String sapName;
 	private String description;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String address;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private LocationInfo locationInfo;
 	
 	public SapData() {	}

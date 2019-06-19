@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.osmanfvo.nslcm.interfaces.elements;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import it.nextworks.nfvmano.libs.common.InterfaceInformationElement;
 import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 
@@ -31,6 +32,8 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 public class VnfInstanceData implements InterfaceInformationElement {
 
 	private String vnfInstanceId;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String vnfProfileId;
 	
 	public VnfInstanceData() {	}

@@ -17,6 +17,7 @@ package it.nextworks.nfvmano.libs.common.elements;
 
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import it.nextworks.nfvmano.libs.common.DescriptorInformationElement;
@@ -37,7 +38,10 @@ import it.nextworks.nfvmano.libs.common.exceptions.MalformattedElementException;
 @Embeddable
 public class AffinityRule implements DescriptorInformationElement {
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private AffinityType affinityType;
+
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private AffinityScope affinityScope;
 	
 	public AffinityRule() {
