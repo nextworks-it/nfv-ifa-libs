@@ -59,13 +59,10 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 		// JPA only
 	}
 	
-	public NsAutoscalingRule(Nsd nsd, 
-			String ruleId) {
+	public NsAutoscalingRule(Nsd nsd, String ruleId) {
 		this.nsd = nsd;
 		this.ruleId = ruleId;
 	}
-	
-	
 
 	/**
 	 * @return the ruleId
