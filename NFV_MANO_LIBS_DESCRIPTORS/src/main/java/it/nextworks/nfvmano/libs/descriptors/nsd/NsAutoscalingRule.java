@@ -47,7 +47,7 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 	
 	@OneToOne(fetch=FetchType.EAGER, mappedBy = "rule", cascade=CascadeType.ALL, orphanRemoval=true)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	private AutoscalingRuleCondition ruleConditions;
+	private AutoscalingRuleCondition ruleCondition;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@OneToMany(mappedBy = "rule", cascade=CascadeType.ALL)
@@ -77,8 +77,8 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 	/**
 	 * @return the ruleConditions
 	 */
-	public AutoscalingRuleCondition getRuleConditions() {
-		return ruleConditions;
+	public AutoscalingRuleCondition getRuleCondition() {
+		return ruleCondition;
 	}
 
 	/**
@@ -91,9 +91,9 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {
 		if (ruleId == null) throw new MalformattedElementException("Autoscaling rule without ID");
-		if (this.ruleConditions == null) 
+		if (this.ruleCondition == null)
 			throw new MalformattedElementException("Autoscaling rule without conditions"); 
-			else ruleConditions.isValid();
+			else ruleCondition.isValid();
 		if ((this.ruleActions == null) || (this.ruleActions.isEmpty())) 
 			throw new MalformattedElementException("Autoscaling rule without actions"); 
 			else for (AutoscalingAction aa : ruleActions) aa.isValid();
