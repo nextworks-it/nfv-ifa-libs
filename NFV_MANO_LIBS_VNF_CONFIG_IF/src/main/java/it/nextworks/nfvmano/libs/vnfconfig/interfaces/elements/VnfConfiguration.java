@@ -16,6 +16,7 @@
 package it.nextworks.nfvmano.libs.vnfconfig.interfaces.elements;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,12 +49,22 @@ public class VnfConfiguration implements InterfaceInformationElement {
 	 * @param dhcpServer Identifies a DHCP server that the VNF can use to obtain IP addresses to be assigned to its external CPs.
 	 * @param vnfSpecificData Configuration object containing values of VNF configurable properties
 	 */
-	public VnfConfiguration(List<CpConfiguration> cpConfiguration,
+	public VnfConfiguration(
+			List<CpConfiguration> cpConfiguration,
 			String dhcpServer,
-			Set<KeyValuePair> vnfSpecificData) {
+			Set<KeyValuePair> vnfSpecificData
+	) {
 		if (cpConfiguration != null) this.cpConfiguration = cpConfiguration;
 		if (vnfSpecificData != null) this.vnfSpecificData = vnfSpecificData;
 		this.dhcpServer = dhcpServer;
+	}
+
+	public VnfConfiguration(
+			List<CpConfiguration> cpConfiguration,
+			String dhcpServer,
+			KeyValuePair... vnfSpecificData
+	) {
+		this(cpConfiguration, dhcpServer, new HashSet<>(Arrays.asList(vnfSpecificData)));
 	}
 
 	
