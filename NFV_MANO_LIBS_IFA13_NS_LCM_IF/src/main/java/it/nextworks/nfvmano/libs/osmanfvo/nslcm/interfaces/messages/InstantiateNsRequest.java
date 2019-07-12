@@ -75,6 +75,10 @@ public class InstantiateNsRequest implements InterfaceMessage {
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<AffinityRule> additionalAffinityOrAntiAffinityRule = new ArrayList<>();
 	
+	//not standard
+	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+	private String serviceType;
+	
 	public InstantiateNsRequest() {
 		// TODO Auto-generated constructor stub
 	}
@@ -119,6 +123,51 @@ public class InstantiateNsRequest implements InterfaceMessage {
 		this.startTime = startTime;
 		this.nsInstantiationLevelId = nsInstantiationLevelId;
 		if (additionalAffinityOrAntiAffinityRule != null) this.additionalAffinityOrAntiAffinityRule = additionalAffinityOrAntiAffinityRule;
+	}
+	
+	/**
+	 * Constructor
+	 * 
+	 * @param nsInstanceId Identifier of the instance of the NS.
+	 * @param flavourId Flavour of the NSD used to instantiate this NS.
+	 * @param sapData Create data concerning the SAPs of this NS.
+	 * @param pnfInfo Information on the PNF(s) that are part of this NS.
+	 * @param vnfInstanceData Specify an existing VNF instance to be used in the NS. If needed, the VNF Profile to be used for this VNF instance is also provided.
+	 * @param nestedNsInstanceId Specify an existing NS instance to be used as a nested NS within the NS.
+	 * @param locationConstraints Defines the location constraints for the VNF to be instantiated as part of the NS instantiation.
+	 * @param additionalParamForNs Allows the OSS/BSS to provide additional parameter(s) at the NS level (as opposed to the VNF level, which is covered in additionalParamForVnf).
+	 * @param additionalParamForVnf Allows the OSS/BSS to provide additional parameter(s) per VNF instance. This is for VNFs that are to be created by the NFVO as part of the NS instantiation and not for existing VNF that are referenced for reuse.
+	 * @param startTime Timestamp indicating the earliest time to instantiate the NS. Cardinality "0" indicates the NS instantiation takes place immediately.
+	 * @param nsInstantiationLevelId Identifies one of the NS instantiation levels declared in the DF applicable to this NS instance. If not present, the default NS instantiation level as declared in the NSD shall be used.
+	 * @param additionalAffinityOrAntiAffinityRule Specifies additional affinity or anti-affinity constraint for the VNF instances to be instantiated as part of the NS instantiation. Shall not conflict with rules already specified in the NSD.
+	 * @param serviceType type of service (e.g. EMBB, URLLC, MTC)
+	 */
+	public InstantiateNsRequest(String nsInstanceId, 
+			String flavourId, 
+			List<SapData> sapData,
+			List<PnfInfo> pnfInfo, 
+			List<VnfInstanceData> vnfInstanceData, 
+			List<String> nestedNsInstanceId,
+			List<VnfLocationConstraints> locationConstraints,
+			Map<String, String> additionalParamForNs,
+			List<ParamsForVnf> additionalParamForVnf,
+			Date startTime,
+			String nsInstantiationLevelId,
+			List<AffinityRule> additionalAffinityOrAntiAffinityRule,
+			String serviceType) {
+		this.nsInstanceId = nsInstanceId;
+		this.flavourId = flavourId;
+		if (sapData != null) this.sapData = sapData;
+		if (pnfInfo != null) this.pnfInfo = pnfInfo;
+		if (vnfInstanceData != null) this.vnfInstanceData = vnfInstanceData;
+		if (nestedNsInstanceId != null) this.nestedNsInstanceId = nestedNsInstanceId;
+		if (locationConstraints != null) this.locationConstraints = locationConstraints;
+		if (additionalParamForNs != null) this.additionalParamForNs = additionalParamForNs;
+		if (additionalParamForVnf != null) this.additionalParamForVnf = additionalParamForVnf;
+		this.startTime = startTime;
+		this.nsInstantiationLevelId = nsInstantiationLevelId;
+		if (additionalAffinityOrAntiAffinityRule != null) this.additionalAffinityOrAntiAffinityRule = additionalAffinityOrAntiAffinityRule;
+		this.serviceType = serviceType;
 	}
 	
 	
@@ -207,6 +256,15 @@ public class InstantiateNsRequest implements InterfaceMessage {
 		return additionalAffinityOrAntiAffinityRule;
 	}
 	
+	
+	
+	/**
+	 * @return the serviceType
+	 */
+	public String getServiceType() {
+		return serviceType;
+	}
+
 	/**
 	 * 
 	 * @return the overall list of configuration parameters, for both VNFs and NS
