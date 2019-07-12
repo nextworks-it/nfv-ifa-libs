@@ -38,7 +38,7 @@ public class Threshold implements InterfaceInformationElement {
 	private List<ObjectSelection> objectSelector = new ArrayList<>();
 	private String performanceMetric;
 	private ThresholdType thresholdType;
-	private String thresholdDetails;
+	private ThresholdDetails thresholdDetails;
 	
 	public Threshold() { }
 	
@@ -55,7 +55,7 @@ public class Threshold implements InterfaceInformationElement {
 			List<ObjectSelection> objectSelector,
 			String performanceMetric,
 			ThresholdType thresholdType,
-			String thresholdDetails) { 
+			ThresholdDetails thresholdDetails) {
 		this.thresholdId = thresholdId;
 		this.performanceMetric = performanceMetric;
 		if (objectSelector != null) this.objectSelector = objectSelector;
@@ -96,7 +96,7 @@ public class Threshold implements InterfaceInformationElement {
 	/**
 	 * @return the thresholdDetails
 	 */
-	public String getThresholdDetails() {
+	public ThresholdDetails getThresholdDetails() {
 		return thresholdDetails;
 	}
 
