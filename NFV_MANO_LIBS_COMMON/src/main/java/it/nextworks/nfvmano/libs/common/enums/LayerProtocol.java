@@ -31,6 +31,8 @@ public enum LayerProtocol {
 	ODU,
 	SDM,
 	
+	AROF,
+	
 	//To handle old cases
 	NOT_SPECIFIED
 }
