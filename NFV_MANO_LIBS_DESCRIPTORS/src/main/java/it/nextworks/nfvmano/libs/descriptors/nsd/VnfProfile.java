@@ -92,6 +92,15 @@ public class VnfProfile implements DescriptorInformationElement {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity = new ArrayList<>();
 	
+	
+	//This is an extension OUT of the standard
+	@OneToMany(mappedBy = "vnfProfile", cascade=CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<VnfLCMScripts> script = new ArrayList<>();
+	
+	
 	public VnfProfile() {
 		// JPA only
 	}
@@ -253,5 +262,13 @@ public class VnfProfile implements DescriptorInformationElement {
 			for (AffinityRule rule : this.localAffinityOrAntiAffinityRule) rule.isValid();
 		}
 	}
+	
+	/**
+	 * @return the script
+	 */
+	public List<VnfLCMScripts> getScript() {
+		return script;
+	}
+
 
 }
