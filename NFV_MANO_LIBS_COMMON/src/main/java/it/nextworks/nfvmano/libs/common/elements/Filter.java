@@ -53,6 +53,12 @@ public class Filter {
 	//VSB_ID
 	//VSD_ID
 	//VSI_ID
+	//CTXB_NAME & CTXB_VERSION
+	//TCB_NAME & TCB_VERSION
+	//CTXB_ID
+	//CTXD_ID & TENANT_ID
+	//TCB_ID
+	//TCD_ID
 	//TENANT_ID
 	//POLICY_ID
 	//POLICY_STATUS
