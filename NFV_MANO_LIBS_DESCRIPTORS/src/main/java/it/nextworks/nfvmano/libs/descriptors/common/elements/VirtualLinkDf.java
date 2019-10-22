@@ -111,8 +111,30 @@ public class VirtualLinkDf implements DescriptorInformationElement {
 		this.qos = qos;
 		this.serviceAvaibilityLevel = serviceAvaibilityLevel;
 	}
-	
-	
+
+	/**
+	 * Constructor
+	 *
+	 * @param vnfVld Identifies the virtual link descriptor this VL DF belongs to
+	 * @param flavourId Identifies this VirtualLinkDf information element within a VLD.
+	 * @param qos	qos of the VL
+	 * @param serviceAvaibilityLevel Specifies one of the three levels defined in ETSI GS NFV-REL 001
+	 * @param bitrateRequirements Specifies the bitrate requirements for the link
+	 */
+	public VirtualLinkDf(VnfVirtualLinkDesc vnfVld,
+						 String flavourId,
+						 QoS qos,
+						 ServiceAvailabilityLevel serviceAvaibilityLevel,
+						 LinkBitrateRequirements bitrateRequirements) {
+		this.nsVld = null;
+		this.vnfVld = vnfVld;
+		this.flavourId = flavourId;
+		this.qos = qos;
+		this.serviceAvaibilityLevel = serviceAvaibilityLevel;
+		this.bitrateRequirements = bitrateRequirements;
+	}
+
+
 
 	/**
 	 * @return the flavourId
@@ -144,4 +166,8 @@ public class VirtualLinkDf implements DescriptorInformationElement {
 		if (this.qos != null) qos.isValid();
 	}
 
+	@JsonProperty("bitrateRequirements")
+	public LinkBitrateRequirements getBitrateRequirements() {
+		return bitrateRequirements;
+	}
 }
