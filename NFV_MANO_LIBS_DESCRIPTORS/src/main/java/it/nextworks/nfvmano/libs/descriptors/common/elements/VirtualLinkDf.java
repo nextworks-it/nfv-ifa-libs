@@ -63,7 +63,11 @@ public class VirtualLinkDf implements DescriptorInformationElement {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@Embedded
 	private QoS qos;
-	
+
+	//THIS IS OUT OF THE STANDARD, ADDED FOR 5G-TRANSFORMER SO COMPATIBILITY
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private LinkBitrateRequirements bitrateRequirements;
+
 	private ServiceAvailabilityLevel serviceAvaibilityLevel;
 	
 	public VirtualLinkDf() {
