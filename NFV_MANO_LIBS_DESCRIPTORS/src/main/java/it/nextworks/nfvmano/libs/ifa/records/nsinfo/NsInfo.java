@@ -252,6 +252,50 @@ public class NsInfo implements DescriptorInformationElement {
 	
 	
 	/**
+	 * @param nsInstanceId
+	 * @param nsName
+	 * @param description
+	 * @param nsdId
+	 * @param tenantId
+	 * @param configurationParameters
+	 * @param flavourId
+	 * @param vnfInfoId
+	 * @param pnfInfo
+	 * @param virtualLinkInfo
+	 * @param vnffgInfo
+	 * @param sapInfo
+	 * @param nestedNsInfoId
+	 * @param nsState
+	 * @param nsScaleStatus
+	 * @param additionalAffinityOrAntiAffinityRule
+	 * @param monitoringDashboardUrl
+	 */
+	public NsInfo(String nsInstanceId, String nsName, String description, String nsdId, String tenantId,
+			Map<String, String> configurationParameters, String flavourId, List<String> vnfInfoId,
+			List<PnfInfo> pnfInfo,
+			List<NsVirtualLinkInfo> virtualLinkInfo, List<VnffgInfo> vnffgInfo, List<SapInfo> sapInfo,
+			List<String> nestedNsInfoId, InstantiationState nsState, List<NsScaleInfo> nsScaleStatus,
+			List<AffinityRule> additionalAffinityOrAntiAffinityRule, String monitoringDashboardUrl) {
+		this.nsInstanceId = nsInstanceId;
+		this.nsName = nsName;
+		this.description = description;
+		this.nsdId = nsdId;
+		this.tenantId = tenantId;
+		this.configurationParameters = configurationParameters;
+		this.flavourId = flavourId;
+		this.vnfInfoId = vnfInfoId;
+		this.pnfInfo = pnfInfo;
+		this.virtualLinkInfo = virtualLinkInfo;
+		this.vnffgInfo = vnffgInfo;
+		this.sapInfo = sapInfo;
+		this.nestedNsInfoId = nestedNsInfoId;
+		this.nsState = nsState;
+		this.nsScaleStatus = nsScaleStatus;
+		this.additionalAffinityOrAntiAffinityRule = additionalAffinityOrAntiAffinityRule;
+		this.monitoringDashboardUrl = monitoringDashboardUrl;
+	}
+
+	/**
 	 * @param flavourId the flavourId to set
 	 */
 	public void setFlavourId(String flavourId) {
