@@ -15,6 +15,12 @@
 
 package it.nextworks.nfvmano.libs.ifa.templates;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * See:
  *  3gpp Clause 6.4.1 of TS 28.541 (PerfReq)
@@ -24,8 +30,13 @@ package it.nextworks.nfvmano.libs.ifa.templates;
  * NOTE: scenario examples present in table 7.1-1 have not been reported in the implementation
  *        as suggested by TS 28.541
  */
+@Entity
 public class EMBBPerfReq extends SlicePerfReq{
 
+	@Id
+    @GeneratedValue
+    @JsonIgnore
+	private Long id;
     private int expDataRateDL;
     private int expDataRateUL;
     private int areaTrafficCapDL;
@@ -112,4 +123,12 @@ public class EMBBPerfReq extends SlicePerfReq{
     public void setCoverage(String coverage) {
         this.coverage = coverage;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

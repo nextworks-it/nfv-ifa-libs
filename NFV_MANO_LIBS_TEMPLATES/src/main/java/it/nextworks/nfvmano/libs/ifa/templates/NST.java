@@ -15,20 +15,40 @@
 
 package it.nextworks.nfvmano.libs.ifa.templates;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementException;
 
-import java.util.List;
 
 /**
  * Network Service Template definition
  */
+@Entity
 public class NST {
 
+	@Id
+    @GeneratedValue
+    @JsonIgnore
+    private Long id;
+	
     private String nstId;
+    private String nstName;
     private String nstVersion;
     private String nstProvider;
+    @ElementCollection(targetClass=String.class)
     private List<String> nsstIds;
     private String nsdId;
+
+    @OneToOne(cascade = {CascadeType.ALL})
     private NstServiceProfile nstServiceProfile;
 
     public NST() { }
@@ -93,6 +113,10 @@ public class NST {
         this.nstId = nstId;
     }
 
+    public Long getId(){
+    			return id;
+    }
+    	
     public String getNstVersion() {
         return nstVersion;
     }
@@ -138,4 +162,12 @@ public class NST {
         if(this.nstVersion == null) throw new MalformattedElementException("NST version not set");
         if(this.nstProvider == null) throw new MalformattedElementException("NST provider not set");
     }
+
+	public String getNstName() {
+		return nstName;
+	}
+
+	public void setNstName(String nstName) {
+		this.nstName = nstName;
+	}
 }

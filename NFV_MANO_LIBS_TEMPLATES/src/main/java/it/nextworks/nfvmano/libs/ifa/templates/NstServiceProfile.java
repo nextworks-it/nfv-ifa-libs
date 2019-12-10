@@ -17,20 +17,57 @@ package it.nextworks.nfvmano.libs.ifa.templates;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 /**
- * Service Profile fo the NST - Defined @3gpp-TS28.541 - Clause 6.3.3
+ * Service Profile for the NST - Defined @3gpp-TS28.541 - Clause 6.3.3
  */
 
+@Entity
 public class NstServiceProfile {
+	
+	@Id
+    @GeneratedValue
+    @JsonIgnore
+	private Long id;
+	
     private String serviceProfileId;
     //sNSSAIList Omitted
+    @ElementCollection(targetClass=String.class)
     private List<String> pLMNIdList;
+    
+    /*
+    @ElementCollection//(targetClass=SlicePerfReq.class)
+	@OneToMany(cascade=CascadeType.ALL)
     private List<SlicePerfReq> perfReq;
+    */
+    @ElementCollection
+	@OneToMany(cascade=CascadeType.ALL)
+    private List<EMBBPerfReq> eMBBPerfReq;
+    
+    @ElementCollection
+	@OneToMany(cascade=CascadeType.ALL)
+    private List<URLLCPerfReq> uRLLCPerfReq;
+    
     private int maxNumberofUEs;
+    @ElementCollection(targetClass=String.class)
     private List<String> coverageAreaTAList;
     private int latency;
+    
+    @Enumerated(EnumType.STRING)
     private UEMobilityLevel uEMobilityLevel;
     private Boolean resourceSharingLevel; // SHARED = true, NOT-SHARED =  false
+    @Enumerated(EnumType.STRING)
     private SliceType sST;
     private float availability;
 
@@ -50,13 +87,13 @@ public class NstServiceProfile {
      * @param sST SliceType (e.g. urllc)
      * @param availability in %
      */
-    public NstServiceProfile(String serviceProfileId, List<String> pLMNIdList, List<SlicePerfReq> perfReq,
+    public NstServiceProfile(String serviceProfileId, List<String> pLMNIdList, /*List<SlicePerfReq> perfReq,*/
                              int maxNumberofUEs, List<String> coverageAreaTAList, int latency,
                              UEMobilityLevel uEMobilityLevel, Boolean resourceSharingLevel, SliceType sST,
                              float availability) {
         this.serviceProfileId = serviceProfileId;
         this.pLMNIdList = pLMNIdList;
-        this.perfReq = perfReq;
+        //this.perfReq = perfReq;
         this.maxNumberofUEs = maxNumberofUEs;
         this.coverageAreaTAList = coverageAreaTAList;
         this.latency = latency;
@@ -81,7 +118,7 @@ public class NstServiceProfile {
     public void setpLMNIdList(List<String> pLMNIdList) {
         this.pLMNIdList = pLMNIdList;
     }
-
+    /*
     public List<SlicePerfReq> getPerfReq() {
         return perfReq;
     }
@@ -89,7 +126,7 @@ public class NstServiceProfile {
     public void setPerfReq(List<SlicePerfReq> perfReq) {
         this.perfReq = perfReq;
     }
-
+    */
     public int getMaxNumberofUEs() {
         return maxNumberofUEs;
     }
@@ -145,4 +182,28 @@ public class NstServiceProfile {
     public void setAvailability(float availability) {
         this.availability = availability;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<EMBBPerfReq> geteMBBPerfReq() {
+		return eMBBPerfReq;
+	}
+
+	public void seteMBBPerfReq(List<EMBBPerfReq> eMBBPerfReq) {
+		this.eMBBPerfReq = eMBBPerfReq;
+	}
+
+	public List<URLLCPerfReq> getuRLLCPerfReq() {
+		return uRLLCPerfReq;
+	}
+
+	public void setuRLLCPerfReq(List<URLLCPerfReq> uRLLCPerfReq) {
+		this.uRLLCPerfReq = uRLLCPerfReq;
+	}
 }

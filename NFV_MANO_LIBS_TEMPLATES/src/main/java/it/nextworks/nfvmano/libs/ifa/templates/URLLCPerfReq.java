@@ -15,6 +15,14 @@
 
 package it.nextworks.nfvmano.libs.ifa.templates;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * See:
  *  3gpp Clause 6.4.1 of TS 28.541 (PerfReq)
@@ -22,12 +30,17 @@ package it.nextworks.nfvmano.libs.ifa.templates;
  *  3ggp Clause 7.2.2 of TS 22.261
  *
  */
+@Entity
 public class URLLCPerfReq extends SlicePerfReq {
 /**
  * e2eLatency (Integer), jitter (Integer), survivalTime (Integer), cSAvailability (Float),
  * reliability (Float), expDataRate (Integer), payloadSize (String), trafficDensity (Integer),
  * connDensity (Integer), serviceAreaDimension (String)
  */
+	@Id
+    @GeneratedValue
+    @JsonIgnore
+	private Long id;
     private int e2eLatency;
     private int jitter;
     private int survivalTime;
@@ -149,4 +162,12 @@ public class URLLCPerfReq extends SlicePerfReq {
     public void setServiceAreaDimension(String serviceAreaDimension) {
         this.serviceAreaDimension = serviceAreaDimension;
     }
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

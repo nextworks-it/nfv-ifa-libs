@@ -15,6 +15,27 @@
 
 package it.nextworks.nfvmano.libs.ifa.templates;
 
-public abstract class SlicePerfReq {
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class SlicePerfReq {
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	protected Long id;
+
+	public SlicePerfReq() {
+
+	}
+	
+	
 }
