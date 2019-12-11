@@ -20,9 +20,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -45,6 +51,7 @@ public class NST {
     private String nstVersion;
     private String nstProvider;
     @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> nsstIds;
     private String nsdId;
 

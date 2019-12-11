@@ -22,9 +22,13 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,6 +48,7 @@ public class NstServiceProfile {
     private String serviceProfileId;
     //sNSSAIList Omitted
     @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> pLMNIdList;
     
     /*
@@ -53,14 +58,17 @@ public class NstServiceProfile {
     */
     @ElementCollection
 	@OneToMany(cascade=CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<EMBBPerfReq> eMBBPerfReq;
     
     @ElementCollection
 	@OneToMany(cascade=CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<URLLCPerfReq> uRLLCPerfReq;
     
     private int maxNumberofUEs;
     @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> coverageAreaTAList;
     private int latency;
     
