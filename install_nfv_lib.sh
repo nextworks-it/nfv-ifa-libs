@@ -29,6 +29,7 @@ DIR_LIBS_VNF_CONF=NFV_MANO_LIBS_VNF_CONFIG_IF/
 DIR_LIBS_SW_IMAGE=NFV_MANO_LIBS_SW_IMAGES_IF/
 DIR_LIBS_ORVI=NFV_MANO_LIBS_IFA05_VR_MGT_IF/
 DIR_LIBS_POLICY=NFV_MANO_LIBS_POLICY_MGT_IF/
+DIR_LIBS_NST=NFV_MANO_LIBS_TEMPLATES/
 
 mvn_install() {
 	cd "$1"
@@ -79,6 +80,8 @@ cd ..
 mvn_install $DIR_LIBS_ORVI "NFV libs OrVi"
 cd ..
 mvn_install $DIR_LIBS_POLICY "NFV libs Policy management"
+cd ..
+mvn_install $DIR_LIBS_NST "NFV libs Network Slice template"
 
 echo "All NFV libs installed!"
 
