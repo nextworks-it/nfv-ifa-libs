@@ -15,18 +15,16 @@
 
 package it.nextworks.nfvmano.libs.ifa.templates;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.hibernate.FetchMode;
-import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -50,69 +48,58 @@ public class NST {
     private String nstName;
     private String nstVersion;
     private String nstProvider;
+    
     @ElementCollection(targetClass=String.class)
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<String> nsstIds;
+    private List<String> nsstIds = new ArrayList<String>();
+    
+    //Additional info to manage the association with NFV NSD
     private String nsdId;
+    private String nsdVersion;
 
     @OneToOne(cascade = {CascadeType.ALL})
     private NstServiceProfile nstServiceProfile;
 
     public NST() { }
 
-    /**
-     *
-     * @param nstId Id of the NST
-     * @param nstVersion Version of the NST
-     * @param nstProvider NST provider
-     * @param nsstIds List of NSST IDs
-     * @param nsdId NSD Id
-     */
-    public NST(String nstId, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId) {
-        this.nstId = nstId;
-        this.nstVersion = nstVersion;
-        this.nstProvider = nstProvider;
-        this.nsstIds = nsstIds;
-        this.nsdId = nsdId;
-    }
+    
 
+    
+    
     /**
-     *
-     * @param nstId Id of the NST
-     * @param nstVersion Version of the NST
-     * @param nstProvider NST provider
-     * @param nsstIds List of NSST IDs
-     * @param nstServiceProfile [optional] - For the RAN segment, as defined @3gpp-TS28.541 - Clause 6.3.3
+     * Constructor
+     * 
+     * @param nstId ID of the NST
+     * @param nstName name of the NST
+     * @param nstVersion version of the NST
+     * @param nstProvider provider of the NST
+     * @param nsstIds ID of the network slice subnet templates included in the NST
+     * @param nsdId ID of the NFV Network Service Descriptor associated to the NST
+     * @param nsdVersion version of the NFV Network Service Descriptor associated to the NST
+     * @param nstServiceProfile service profile associated to the NST
      */
-    public NST(String nstId, String nstVersion, String nstProvider, List<String> nsstIds,
-               NstServiceProfile nstServiceProfile) {
-        this.nstId = nstId;
-        this.nstVersion = nstVersion;
-        this.nstProvider = nstProvider;
-        this.nsstIds = nsstIds;
-        this.nstServiceProfile = nstServiceProfile;
-    }
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
+			String nsdVersion, NstServiceProfile nstServiceProfile) {
+		this.nstId = nstId;
+		this.nstName = nstName;
+		this.nstVersion = nstVersion;
+		this.nstProvider = nstProvider;
+		if (nsstIds != null) this.nsstIds = nsstIds;
+		this.nsdId = nsdId;
+		this.nsdVersion = nsdVersion;
+		this.nstServiceProfile = nstServiceProfile;
+	}
 
-    /**
-     *
-     * @param nstId Id of the NST
-     * @param nstVersion Version of the NST
-     * @param nstProvider NST provider
-     * @param nsstIds List of NSST IDs
-     * @param nsdId NSD Id
-     * @param nstServiceProfile [optional] - For the RAN segment, as defined @3gpp-TS28.541 - Clause 6.3.3
-     */
-    public NST(String nstId, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
-               NstServiceProfile nstServiceProfile) {
-        this.nstId = nstId;
-        this.nstVersion = nstVersion;
-        this.nstProvider = nstProvider;
-        this.nsstIds = nsstIds;
-        this.nsdId = nsdId;
-        this.nstServiceProfile = nstServiceProfile;
-    }
 
-    public String getNstId() {
+
+
+
+
+	public String getNsdVersion() {
+		return nsdVersion;
+	}
+
+	public String getNstId() {
         return nstId;
     }
 
@@ -168,6 +155,8 @@ public class NST {
         if(this.nstId == null) throw new MalformattedElementException("NST id not set");
         if(this.nstVersion == null) throw new MalformattedElementException("NST version not set");
         if(this.nstProvider == null) throw new MalformattedElementException("NST provider not set");
+        if (this.nsdId == null) throw new MalformattedElementException("NFV NSD ID associated to NST not set");
+        if (this.nsdVersion == null) throw new MalformattedElementException("NFV NSD version associated to NST not set");
     }
 
 	public String getNstName() {
