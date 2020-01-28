@@ -25,6 +25,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.PpFunction;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -59,6 +60,11 @@ public class NST {
 
     @OneToOne(cascade = {CascadeType.ALL})
     private NstServiceProfile nstServiceProfile;
+
+    @ElementCollection(targetClass= PpFunction.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PpFunction> ppFunctionList;
+
 
     public NST() { }
 
@@ -166,4 +172,12 @@ public class NST {
 	public void setNstName(String nstName) {
 		this.nstName = nstName;
 	}
+
+    public List<PpFunction> getPpFunctionList() {
+        return ppFunctionList;
+    }
+
+    public void setPpFunctionList(List<PpFunction> ppFunctionList) {
+        this.ppFunctionList = ppFunctionList;
+    }
 }
