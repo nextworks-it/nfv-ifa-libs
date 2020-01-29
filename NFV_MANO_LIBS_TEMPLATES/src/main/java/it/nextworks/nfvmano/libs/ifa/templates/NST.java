@@ -18,12 +18,7 @@ package it.nextworks.nfvmano.libs.ifa.templates;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.PpFunction;
 import org.hibernate.annotations.LazyCollection;
@@ -61,9 +56,9 @@ public class NST {
     @OneToOne(cascade = {CascadeType.ALL})
     private NstServiceProfile nstServiceProfile;
 
-    @ElementCollection(targetClass= PpFunction.class)
+    @OneToMany(cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<PpFunction> ppFunctionList;
+    private List<PpFunction> ppFunctionList = new ArrayList<PpFunction>();
 
 
     public NST() { }
@@ -96,7 +91,18 @@ public class NST {
 		this.nstServiceProfile = nstServiceProfile;
 	}
 
-
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
+               String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList) {
+        this.nstId = nstId;
+        this.nstName = nstName;
+        this.nstVersion = nstVersion;
+        this.nstProvider = nstProvider;
+        if (nsstIds != null) this.nsstIds = nsstIds;
+        this.nsdId = nsdId;
+        this.nsdVersion = nsdVersion;
+        this.nstServiceProfile = nstServiceProfile;
+        setPpFunctionList(ppFunctionList);
+    }
 
 
 
@@ -163,6 +169,18 @@ public class NST {
         if(this.nstProvider == null) throw new MalformattedElementException("NST provider not set");
         if (this.nsdId == null) throw new MalformattedElementException("NFV NSD ID associated to NST not set");
         if (this.nsdVersion == null) throw new MalformattedElementException("NFV NSD version associated to NST not set");
+        for(PpFunction ppFunction: ppFunctionList)
+            ppFunction.isValid();
+        checkPpFunctionsDuplicate();
+    }
+
+    private void checkPpFunctionsDuplicate() throws MalformattedElementException {
+        for(int i=0; i<ppFunctionList.size(); i++) {
+            for (int j = i+1; j < ppFunctionList.size(); j++) {
+                if(ppFunctionList.get(i).equals(ppFunctionList.get(j)))
+                    throw new MalformattedElementException("NST cannot have two P&P functions with same name, type and feature.");
+            }
+        }
     }
 
 	public String getNstName() {
@@ -178,6 +196,10 @@ public class NST {
     }
 
     public void setPpFunctionList(List<PpFunction> ppFunctionList) {
+        for(int i=0; i<ppFunctionList.size(); i++) {
+            ppFunctionList.get(i).setSeqId(i);
+        }
+
         this.ppFunctionList = ppFunctionList;
     }
 }
