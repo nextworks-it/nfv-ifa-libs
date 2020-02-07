@@ -17,6 +17,7 @@ package it.nextworks.nfvmano.libs.ifa.templates;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.*;
 
@@ -35,16 +36,17 @@ import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementExcept
 @Entity
 public class NST {
 
-	@Id
+    @Id
     @GeneratedValue
     @JsonIgnore
-    private Long id;
+    private UUID uuid;
 	
     private String nstId;
     private String nstName;
     private String nstVersion;
     private String nstProvider;
-    
+
+
     @ElementCollection(targetClass=String.class)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> nsstIds = new ArrayList<String>();
@@ -63,10 +65,6 @@ public class NST {
 
     public NST() { }
 
-    
-
-    
-    
     /**
      * Constructor
      * 
@@ -117,10 +115,6 @@ public class NST {
 
     public void setNstId(String nstId) {
         this.nstId = nstId;
-    }
-
-    public Long getId(){
-    			return id;
     }
     	
     public String getNstVersion() {
@@ -201,5 +195,9 @@ public class NST {
         }
 
         this.ppFunctionList = ppFunctionList;
+    }
+
+    public UUID getUuid() {
+        return this.uuid;
     }
 }
