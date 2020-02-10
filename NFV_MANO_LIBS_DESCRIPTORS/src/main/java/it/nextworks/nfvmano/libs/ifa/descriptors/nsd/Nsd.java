@@ -515,5 +515,68 @@ public class Nsd implements DescriptorInformationElement {
 		
 		return uais;
 	}
-	
+
+	public void setNsdIdentifier(String nsdIdentifier) {
+		this.nsdIdentifier = nsdIdentifier;
+	}
+
+	public void setDesigner(String designer) {
+		this.designer = designer;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public void setNsdName(String nsdName) {
+		this.nsdName = nsdName;
+	}
+
+	public void setNsdInvariantId(String nsdInvariantId) {
+		this.nsdInvariantId = nsdInvariantId;
+	}
+
+	public void setNestedNsdId(List<String> nestedNsdId) {
+		this.nestedNsdId = nestedNsdId;
+	}
+
+	public void setVnfdId(List<String> vnfdId) {
+		this.vnfdId = vnfdId;
+	}
+
+	public void setPnfdId(List<String> pnfdId) {
+		this.pnfdId = pnfdId;
+	}
+
+	public void setSapd(List<Sapd> sapd) {
+		this.sapd = sapd;
+	}
+
+	public void setVirtualLinkDesc(List<NsVirtualLinkDesc> virtualLinkDesc) {
+		this.virtualLinkDesc = virtualLinkDesc;
+	}
+
+	public void setVnffgd(List<Vnffgd> vnffgd) {
+		this.vnffgd = vnffgd;
+	}
+
+	public void setMonitoredInfo(List<MonitoredData> monitoredInfo) {
+		this.monitoredInfo = monitoredInfo;
+	}
+
+	public void setAutoScalingRule(List<NsAutoscalingRule> autoScalingRule) {
+		this.autoScalingRule = autoScalingRule;
+	}
+
+	public void setLifeCycleManagementScript(List<LifeCycleManagementScript> lifeCycleManagementScript) {
+		this.lifeCycleManagementScript = lifeCycleManagementScript;
+	}
+
+	public void setNsDf(List<NsDf> nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setSecurity(SecurityParameters security) {
+		this.security = security;
+	}
 }
