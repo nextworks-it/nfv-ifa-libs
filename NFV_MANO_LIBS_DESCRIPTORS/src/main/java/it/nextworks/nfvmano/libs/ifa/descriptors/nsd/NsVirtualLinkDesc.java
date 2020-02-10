@@ -210,4 +210,40 @@ public class NsVirtualLinkDesc implements DescriptorInformationElement{
 			throw new MalformattedElementException("VLD without connectivity type");
 		} else this.connectivityType.isValid();
 	}
+
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setVirtualLinkDescId(String virtualLinkDescId) {
+		this.virtualLinkDescId = virtualLinkDescId;
+	}
+
+	public void setVirtualLinkDescProvider(String virtualLinkDescProvider) {
+		this.virtualLinkDescProvider = virtualLinkDescProvider;
+	}
+
+	public void setVirtuaLinkDescVersion(String virtuaLinkDescVersion) {
+		this.virtuaLinkDescVersion = virtuaLinkDescVersion;
+	}
+
+	public void setConnectivityType(ConnectivityType connectivityType) {
+		this.connectivityType = connectivityType;
+	}
+
+	public void setVirtualLinkDf(List<VirtualLinkDf> virtualLinkDf) {
+		this.virtualLinkDf = virtualLinkDf;
+	}
+
+	public void setTestAccess(List<String> testAccess) {
+		this.testAccess = testAccess;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setSecurity(SecurityParameters security) {
+		this.security = security;
+	}
 }

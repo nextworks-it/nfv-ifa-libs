@@ -126,4 +126,19 @@ public class Sapd extends Cpd {
 		if ((this.associatedCpdId == null) && (this.nsVirtualLinkDescId == null)) throw new MalformattedElementException("Sapd without associated CPD ID and without NS VLD ID"); 
 	}
 
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setSapAddressAssignment(boolean sapAddressAssignment) {
+		this.sapAddressAssignment = sapAddressAssignment;
+	}
+
+	public void setNsVirtualLinkDescId(String nsVirtualLinkDescId) {
+		this.nsVirtualLinkDescId = nsVirtualLinkDescId;
+	}
+
+	public void setAssociatedCpdId(String associatedCpdId) {
+		this.associatedCpdId = associatedCpdId;
+	}
 }

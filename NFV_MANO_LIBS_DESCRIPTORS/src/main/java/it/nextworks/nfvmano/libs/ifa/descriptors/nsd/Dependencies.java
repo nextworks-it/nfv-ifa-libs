@@ -118,4 +118,15 @@ public class Dependencies implements DescriptorInformationElement {
 		if ((this.secondaryId == null) || (this.secondaryId.isEmpty())) throw new MalformattedElementException("Dependency element without secondary IDs");
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setPrimaryId(List<String> primaryId) {
+		this.primaryId = primaryId;
+	}
+
+	public void setSecondaryId(List<String> secondaryId) {
+		this.secondaryId = secondaryId;
+	}
 }

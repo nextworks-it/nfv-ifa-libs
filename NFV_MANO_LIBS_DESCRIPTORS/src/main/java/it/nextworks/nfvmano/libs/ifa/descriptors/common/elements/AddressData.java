@@ -133,4 +133,27 @@ public class AddressData implements DescriptorInformationElement {
 
 	}
 
+	public void setAddressType(AddressType addressType) {
+		this.addressType = addressType;
+	}
+
+	public void setiPAddressAssignment(boolean iPAddressAssignment) {
+		this.iPAddressAssignment = iPAddressAssignment;
+	}
+
+	public void setFloatingIpActivated(boolean floatingIpActivated) {
+		this.floatingIpActivated = floatingIpActivated;
+	}
+
+	public void setManagement(boolean management) {
+		this.management = management;
+	}
+
+	public void setiPAddressType(IpVersion iPAddressType) {
+		this.iPAddressType = iPAddressType;
+	}
+
+	public void setNumberOfIpAddress(int numberOfIpAddress) {
+		this.numberOfIpAddress = numberOfIpAddress;
+	}
 }

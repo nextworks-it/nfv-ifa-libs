@@ -135,4 +135,19 @@ public class LifeCycleManagementScript implements DescriptorInformationElement {
 		if ((event == null) || (event.isEmpty())) throw new MalformattedElementException("LCM script without event");
 	}
 
+	public void setVnfd(Vnfd vnfd) {
+		this.vnfd = vnfd;
+	}
+
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setEvent(List<LcmEventType> event) {
+		this.event = event;
+	}
+
+	public void setScript(String script) {
+		this.script = script;
+	}
 }

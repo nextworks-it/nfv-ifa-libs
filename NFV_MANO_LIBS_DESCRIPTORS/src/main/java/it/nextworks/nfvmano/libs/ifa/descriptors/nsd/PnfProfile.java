@@ -137,4 +137,19 @@ public class PnfProfile implements DescriptorInformationElement {
 		}
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setPnfProfileId(String pnfProfileId) {
+		this.pnfProfileId = pnfProfileId;
+	}
+
+	public void setPnfdId(String pnfdId) {
+		this.pnfdId = pnfdId;
+	}
+
+	public void setNsVirtualLinkConnectivity(List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity) {
+		this.nsVirtualLinkConnectivity = nsVirtualLinkConnectivity;
+	}
 }

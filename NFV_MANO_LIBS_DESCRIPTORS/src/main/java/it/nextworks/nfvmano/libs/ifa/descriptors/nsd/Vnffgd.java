@@ -209,4 +209,31 @@ public class Vnffgd implements DescriptorInformationElement {
 		}
 	}
 
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setVnffgdId(String vnffgdId) {
+		this.vnffgdId = vnffgdId;
+	}
+
+	public void setVnfdId(List<String> vnfdId) {
+		this.vnfdId = vnfdId;
+	}
+
+	public void setPnfdId(List<String> pnfdId) {
+		this.pnfdId = pnfdId;
+	}
+
+	public void setVirtualLinkDescId(List<String> virtualLinkDescId) {
+		this.virtualLinkDescId = virtualLinkDescId;
+	}
+
+	public void setCpdPoolId(List<String> cpdPoolId) {
+		this.cpdPoolId = cpdPoolId;
+	}
+
+	public void setNfpd(List<Nfpd> nfpd) {
+		this.nfpd = nfpd;
+	}
 }

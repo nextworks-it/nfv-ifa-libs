@@ -73,4 +73,11 @@ public class LinkBitrateRequirements implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {	}
 
+	public void setRoot(String root) {
+		this.root = root;
+	}
+
+	public void setLeaf(String leaf) {
+		this.leaf = leaf;
+	}
 }

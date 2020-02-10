@@ -270,5 +270,47 @@ public class VnfProfile implements DescriptorInformationElement {
 		return script;
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
 
+	public void setVnfProfileId(String vnfProfileId) {
+		this.vnfProfileId = vnfProfileId;
+	}
+
+	public void setVnfdId(String vnfdId) {
+		this.vnfdId = vnfdId;
+	}
+
+	public void setFlavourId(String flavourId) {
+		this.flavourId = flavourId;
+	}
+
+	public void setInstantiationLevel(String instantiationLevel) {
+		this.instantiationLevel = instantiationLevel;
+	}
+
+	public void setMinNumberOfInstances(int minNumberOfInstances) {
+		this.minNumberOfInstances = minNumberOfInstances;
+	}
+
+	public void setMaxNumberOfInstances(int maxNumberOfInstances) {
+		this.maxNumberOfInstances = maxNumberOfInstances;
+	}
+
+	public void setLocalAffinityOrAntiAffinityRule(List<AffinityRule> localAffinityOrAntiAffinityRule) {
+		this.localAffinityOrAntiAffinityRule = localAffinityOrAntiAffinityRule;
+	}
+
+	public void setAffinityOrAntiAffinityGroupId(List<String> affinityOrAntiAffinityGroupId) {
+		this.affinityOrAntiAffinityGroupId = affinityOrAntiAffinityGroupId;
+	}
+
+	public void setNsVirtualLinkConnectivity(List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity) {
+		this.nsVirtualLinkConnectivity = nsVirtualLinkConnectivity;
+	}
+
+	public void setScript(List<VnfLCMScripts> script) {
+		this.script = script;
+	}
 }

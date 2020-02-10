@@ -100,4 +100,19 @@ public class CategoryRef implements DescriptorInformationElement {
 		if (version == null) throw new MalformattedElementException("Category ref without version");
 	}
 
+	public void setHref(String href) {
+		this.href = href;
+	}
+
+	public void setCatRefId(String catRefId) {
+		this.catRefId = catRefId;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 }

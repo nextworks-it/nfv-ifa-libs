@@ -96,4 +96,19 @@ public class NsAutoscalingRule implements DescriptorInformationElement {
 			else for (AutoscalingAction aa : ruleActions) aa.isValid();
 	}
 
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setRuleId(String ruleId) {
+		this.ruleId = ruleId;
+	}
+
+	public void setRuleCondition(AutoscalingRuleCondition ruleCondition) {
+		this.ruleCondition = ruleCondition;
+	}
+
+	public void setRuleActions(List<AutoscalingAction> ruleActions) {
+		this.ruleActions = ruleActions;
+	}
 }

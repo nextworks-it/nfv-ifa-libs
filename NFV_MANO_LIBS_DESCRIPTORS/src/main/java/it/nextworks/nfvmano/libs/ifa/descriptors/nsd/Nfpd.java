@@ -173,4 +173,23 @@ public class Nfpd implements DescriptorInformationElement {
 		if (this.qos != null) this.qos.isValid();
 	}
 
+	public void setFg(Vnffgd fg) {
+		this.fg = fg;
+	}
+
+	public void setNfpId(String nfpId) {
+		this.nfpId = nfpId;
+	}
+
+	public void setNfpRule(Rule nfpRule) {
+		this.nfpRule = nfpRule;
+	}
+
+	public void setCpd(List<String> cpd) {
+		this.cpd = cpd;
+	}
+
+	public void setQos(QoS qos) {
+		this.qos = qos;
+	}
 }

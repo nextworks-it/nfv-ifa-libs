@@ -100,4 +100,19 @@ public class VirtualCpuData implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {	}
 
+	public void setCpuArchitecture(String cpuArchitecture) {
+		this.cpuArchitecture = cpuArchitecture;
+	}
+
+	public void setNumVirtualCpu(int numVirtualCpu) {
+		this.numVirtualCpu = numVirtualCpu;
+	}
+
+	public void setVirtualCpuClock(int virtualCpuClock) {
+		this.virtualCpuClock = virtualCpuClock;
+	}
+
+	public void setVirtualCpuOversubscriptionPolicy(String virtualCpuOversubscriptionPolicy) {
+		this.virtualCpuOversubscriptionPolicy = virtualCpuOversubscriptionPolicy;
+	}
 }

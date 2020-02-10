@@ -140,4 +140,24 @@ public class VirtualLinkDf implements DescriptorInformationElement {
 		if (this.qos != null) qos.isValid();
 	}
 
+	public void setNsVld(NsVirtualLinkDesc nsVld) {
+		this.nsVld = nsVld;
+	}
+
+	public void setVnfVld(VnfVirtualLinkDesc vnfVld) {
+		this.vnfVld = vnfVld;
+	}
+
+	public void setFlavourId(String flavourId) {
+		this.flavourId = flavourId;
+	}
+
+	public void setQos(QoS qos) {
+		this.qos = qos;
+	}
+
+	public void setServiceAvaibilityLevel(ServiceAvailabilityLevel serviceAvaibilityLevel) {
+		this.serviceAvaibilityLevel = serviceAvaibilityLevel;
+	}
+
 }

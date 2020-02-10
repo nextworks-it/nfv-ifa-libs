@@ -85,4 +85,15 @@ public class VirtualMemoryData implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {	}
 
+	public void setVirtualMemSize(int virtualMemSize) {
+		this.virtualMemSize = virtualMemSize;
+	}
+
+	public void setVirtualMemOversubscriptionPolicy(String virtualMemOversubscriptionPolicy) {
+		this.virtualMemOversubscriptionPolicy = virtualMemOversubscriptionPolicy;
+	}
+
+	public void setNumaEnabled(boolean numaEnabled) {
+		this.numaEnabled = numaEnabled;
+	}
 }

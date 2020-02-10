@@ -77,4 +77,11 @@ public class NsToLevelMapping implements DescriptorInformationElement {
 		if (this.nsProfileId == null) throw new MalformattedElementException("NS to level mapping without NS profile ID");
 	}
 
+	public void setNsProfileId(String nsProfileId) {
+		this.nsProfileId = nsProfileId;
+	}
+
+	public void setNumberOfInstances(int numberOfInstances) {
+		this.numberOfInstances = numberOfInstances;
+	}
 }

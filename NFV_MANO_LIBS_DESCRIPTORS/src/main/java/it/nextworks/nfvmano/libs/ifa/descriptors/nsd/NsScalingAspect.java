@@ -161,4 +161,23 @@ public class NsScalingAspect implements DescriptorInformationElement {
 		}
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setNsScalingAspectId(String nsScalingAspectId) {
+		this.nsScalingAspectId = nsScalingAspectId;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setNsScaleLevel(List<NsLevel> nsScaleLevel) {
+		this.nsScaleLevel = nsScaleLevel;
+	}
 }

@@ -185,4 +185,43 @@ public class AutoscalingRuleCondition implements DescriptorInformationElement {
 			else for (AutoscalingRuleCriteria arc : scalingCriteria) arc.isValid();
 	}
 
+	public void setRule(NsAutoscalingRule rule) {
+		this.rule = rule;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setScalingType(ScalingProcedureType scalingType) {
+		this.scalingType = scalingType;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setScaleInOperationType(LogicOperation scaleInOperationType) {
+		this.scaleInOperationType = scaleInOperationType;
+	}
+
+	public void setScaleOutOperationType(LogicOperation scaleOutOperationType) {
+		this.scaleOutOperationType = scaleOutOperationType;
+	}
+
+	public void setThresholdTime(int thresholdTime) {
+		this.thresholdTime = thresholdTime;
+	}
+
+	public void setCooldownTime(int cooldownTime) {
+		this.cooldownTime = cooldownTime;
+	}
+
+	public void setInitialInstantiationLevel(String initialInstantiationLevel) {
+		this.initialInstantiationLevel = initialInstantiationLevel;
+	}
+
+	public void setScalingCriteria(List<AutoscalingRuleCriteria> scalingCriteria) {
+		this.scalingCriteria = scalingCriteria;
+	}
 }

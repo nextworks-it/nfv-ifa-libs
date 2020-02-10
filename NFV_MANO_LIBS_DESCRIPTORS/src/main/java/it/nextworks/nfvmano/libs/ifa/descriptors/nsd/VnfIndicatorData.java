@@ -73,4 +73,11 @@ public class VnfIndicatorData implements DescriptorInformationElement {
 		if (this.vnfIndicator == null) throw new MalformattedElementException("VNF indicator data without VNF indicator ID");
 	}
 
+	public void setVnfdId(String vnfdId) {
+		this.vnfdId = vnfdId;
+	}
+
+	public void setVnfIndicator(String vnfIndicator) {
+		this.vnfIndicator = vnfIndicator;
+	}
 }

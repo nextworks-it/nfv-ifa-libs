@@ -102,4 +102,15 @@ public class MonitoredData implements DescriptorInformationElement {
 		if (this.monitoringParameter != null) this.monitoringParameter.isValid();
 	}
 
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setVnfIndicatorInfo(VnfIndicatorData vnfIndicatorInfo) {
+		this.vnfIndicatorInfo = vnfIndicatorInfo;
+	}
+
+	public void setMonitoringParameter(MonitoringParameter monitoringParameter) {
+		this.monitoringParameter = monitoringParameter;
+	}
 }

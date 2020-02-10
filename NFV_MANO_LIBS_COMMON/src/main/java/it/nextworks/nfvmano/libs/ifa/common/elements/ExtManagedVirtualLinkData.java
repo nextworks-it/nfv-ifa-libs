@@ -106,4 +106,23 @@ public class ExtManagedVirtualLinkData implements InterfaceInformationElement {
 		if (virtualLinkDescId == null) throw new MalformattedElementException("External managed VL data without VLD ID");
 	}
 
+	public void setExtManagedVirtualLinId(String extManagedVirtualLinId) {
+		this.extManagedVirtualLinId = extManagedVirtualLinId;
+	}
+
+	public void setVirtualLinkDescId(String virtualLinkDescId) {
+		this.virtualLinkDescId = virtualLinkDescId;
+	}
+
+	public void setVimId(String vimId) {
+		this.vimId = vimId;
+	}
+
+	public void setResourceProviderId(String resourceProviderId) {
+		this.resourceProviderId = resourceProviderId;
+	}
+
+	public void setResourceId(String resourceId) {
+		this.resourceId = resourceId;
+	}
 }

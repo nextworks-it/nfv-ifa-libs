@@ -147,4 +147,23 @@ public class NsVirtualLinkConnectivity implements DescriptorInformationElement {
 			throw new MalformattedElementException("NS VL connectivity without CPD IDs");
 	}
 
+	public void setVnfProfile(VnfProfile vnfProfile) {
+		this.vnfProfile = vnfProfile;
+	}
+
+	public void setPnfProfile(PnfProfile pnfProfile) {
+		this.pnfProfile = pnfProfile;
+	}
+
+	public void setNsProfile(NsProfile nsProfile) {
+		this.nsProfile = nsProfile;
+	}
+
+	public void setVirtualLinkProfileId(String virtualLinkProfileId) {
+		this.virtualLinkProfileId = virtualLinkProfileId;
+	}
+
+	public void setCpdId(List<String> cpdId) {
+		this.cpdId = cpdId;
+	}
 }

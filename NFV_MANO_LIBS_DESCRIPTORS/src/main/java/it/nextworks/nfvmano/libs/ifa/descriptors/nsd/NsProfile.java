@@ -237,4 +237,39 @@ public class NsProfile implements DescriptorInformationElement {
 		}
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setNsProfileId(String nsProfileId) {
+		this.nsProfileId = nsProfileId;
+	}
+
+	public void setNsdId(String nsdId) {
+		this.nsdId = nsdId;
+	}
+
+	public void setNsDeploymentFlavourId(String nsDeploymentFlavourId) {
+		this.nsDeploymentFlavourId = nsDeploymentFlavourId;
+	}
+
+	public void setNsInstantiationLevelId(String nsInstantiationLevelId) {
+		this.nsInstantiationLevelId = nsInstantiationLevelId;
+	}
+
+	public void setMinNumberOfInstances(int minNumberOfInstances) {
+		this.minNumberOfInstances = minNumberOfInstances;
+	}
+
+	public void setMaxNumberOfInstances(int maxNumberOfInstances) {
+		this.maxNumberOfInstances = maxNumberOfInstances;
+	}
+
+	public void setAffinityOrAntiaffinityGroupId(List<String> affinityOrAntiaffinityGroupId) {
+		this.affinityOrAntiaffinityGroupId = affinityOrAntiaffinityGroupId;
+	}
+
+	public void setNsVirtualLinkConnectivity(List<NsVirtualLinkConnectivity> nsVirtualLinkConnectivity) {
+		this.nsVirtualLinkConnectivity = nsVirtualLinkConnectivity;
+	}
 }

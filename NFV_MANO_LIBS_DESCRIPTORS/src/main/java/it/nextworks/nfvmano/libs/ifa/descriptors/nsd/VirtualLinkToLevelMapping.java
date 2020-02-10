@@ -98,4 +98,15 @@ public class VirtualLinkToLevelMapping implements DescriptorInformationElement {
 		if (this.bitRateRequirements == null) throw new MalformattedElementException("VL to level mapping without bit rate requirements");
 	}
 
+	public void setNsLevel(NsLevel nsLevel) {
+		this.nsLevel = nsLevel;
+	}
+
+	public void setVirtualLinkProfileId(String virtualLinkProfileId) {
+		this.virtualLinkProfileId = virtualLinkProfileId;
+	}
+
+	public void setBitRateRequirements(LinkBitrateRequirements bitRateRequirements) {
+		this.bitRateRequirements = bitRateRequirements;
+	}
 }

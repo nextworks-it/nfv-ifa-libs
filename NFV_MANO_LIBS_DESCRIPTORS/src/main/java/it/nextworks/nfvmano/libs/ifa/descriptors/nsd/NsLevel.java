@@ -207,4 +207,31 @@ public class NsLevel implements DescriptorInformationElement {
 		if (noNsMap && noVnfMap && noVlMap) throw new MalformattedElementException("NS level without any mapping declared");
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setNsScale(NsScalingAspect nsScale) {
+		this.nsScale = nsScale;
+	}
+
+	public void setNsLevelId(String nsLevelId) {
+		this.nsLevelId = nsLevelId;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setVnfToLevelMapping(List<VnfToLevelMapping> vnfToLevelMapping) {
+		this.vnfToLevelMapping = vnfToLevelMapping;
+	}
+
+	public void setNsToLevelMapping(List<NsToLevelMapping> nsToLevelMapping) {
+		this.nsToLevelMapping = nsToLevelMapping;
+	}
+
+	public void setVirtualLinkToLevelMapping(List<VirtualLinkToLevelMapping> virtualLinkToLevelMapping) {
+		this.virtualLinkToLevelMapping = virtualLinkToLevelMapping;
+	}
 }

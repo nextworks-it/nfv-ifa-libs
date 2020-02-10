@@ -112,4 +112,19 @@ public class ResourceHandle implements DescriptorInformationElement {
 		if ((vimId == null) && (resourceProviderId == null)) throw new MalformattedElementException("Resource Handle without vimID or resource provider ID");
 	}
 
+	public void setVimId(String vimId) {
+		this.vimId = vimId;
+	}
+
+	public void setResourceProviderId(String resourceProviderId) {
+		this.resourceProviderId = resourceProviderId;
+	}
+
+	public void setResourceId(String resourceId) {
+		this.resourceId = resourceId;
+	}
+
+	public void setVimLevelResourceType(String vimLevelResourceType) {
+		this.vimLevelResourceType = vimLevelResourceType;
+	}
 }

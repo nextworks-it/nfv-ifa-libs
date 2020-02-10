@@ -149,4 +149,23 @@ public class Cpd implements DescriptorInformationElement {
 		for (AddressData a : addressData) a.isValid();
 	}
 
+	public void setCpdId(String cpdId) {
+		this.cpdId = cpdId;
+	}
+
+	public void setLayerProtocol(LayerProtocol layerProtocol) {
+		this.layerProtocol = layerProtocol;
+	}
+
+	public void setCpRole(CpRole cpRole) {
+		this.cpRole = cpRole;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setAddressData(List<AddressData> addressData) {
+		this.addressData = addressData;
+	}
 }

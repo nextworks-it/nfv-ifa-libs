@@ -83,4 +83,12 @@ public class AffinityRule implements DescriptorInformationElement {
 		// TODO Auto-generated method stub
 
 	}
+
+	public void setAffinityType(AffinityType affinityType) {
+		this.affinityType = affinityType;
+	}
+
+	public void setAffinityScope(AffinityScope affinityScope) {
+		this.affinityScope = affinityScope;
+	}
 }

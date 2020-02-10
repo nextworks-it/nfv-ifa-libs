@@ -98,4 +98,19 @@ public class QoS implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException {	}
 
+	public void setLatency(int latency) {
+		this.latency = latency;
+	}
+
+	public void setPacketDelayVariation(int packetDelayVariation) {
+		this.packetDelayVariation = packetDelayVariation;
+	}
+
+	public void setPacketLossRatio(int packetLossRatio) {
+		this.packetLossRatio = packetLossRatio;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
 }

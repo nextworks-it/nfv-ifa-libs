@@ -347,4 +347,52 @@ public class NsDf implements DescriptorInformationElement {
 		}
 		throw new NotExistingEntityException("VL profile for VL profile ID " + vlProfileId + " not found");
 	}
+
+	public void setNsd(Nsd nsd) {
+		this.nsd = nsd;
+	}
+
+	public void setNsDfId(String nsDfId) {
+		this.nsDfId = nsDfId;
+	}
+
+	public void setFlavourKey(String flavourKey) {
+		this.flavourKey = flavourKey;
+	}
+
+	public void setVnfProfile(List<VnfProfile> vnfProfile) {
+		this.vnfProfile = vnfProfile;
+	}
+
+	public void setPnfProfile(List<PnfProfile> pnfProfile) {
+		this.pnfProfile = pnfProfile;
+	}
+
+	public void setVirtualLinkProfile(List<VirtualLinkProfile> virtualLinkProfile) {
+		this.virtualLinkProfile = virtualLinkProfile;
+	}
+
+	public void setScalingAspect(List<NsScalingAspect> scalingAspect) {
+		this.scalingAspect = scalingAspect;
+	}
+
+	public void setAffinityOrAntiAffinityGroup(List<AffinityOrAntiAffinityGroup> affinityOrAntiAffinityGroup) {
+		this.affinityOrAntiAffinityGroup = affinityOrAntiAffinityGroup;
+	}
+
+	public void setNsInstantiationLevel(List<NsLevel> nsInstantiationLevel) {
+		this.nsInstantiationLevel = nsInstantiationLevel;
+	}
+
+	public void setDefaultNsInstantiationLevelId(String defaultNsInstantiationLevelId) {
+		this.defaultNsInstantiationLevelId = defaultNsInstantiationLevelId;
+	}
+
+	public void setNsProfile(List<NsProfile> nsProfile) {
+		this.nsProfile = nsProfile;
+	}
+
+	public void setDependencies(List<Dependencies> dependencies) {
+		this.dependencies = dependencies;
+	}
 }

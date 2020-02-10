@@ -65,4 +65,11 @@ public class TimePeriodInformation implements DescriptorInformationElement {
 		if (stopTime == null) throw new MalformattedElementException("Time period information without stop time");
 	}
 
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public void setStopTime(Date stopTime) {
+		this.stopTime = stopTime;
+	}
 }

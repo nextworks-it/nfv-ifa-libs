@@ -91,4 +91,16 @@ public class MonitoringParameter implements DescriptorInformationElement {
 		if (this.monitoringParameterId == null) throw new MalformattedElementException("Monitoring Parameter without ID");
 		if (this.performanceMetric == null) throw new MalformattedElementException("Monitoring Parameter without metric");
 	}
+
+	public void setMonitoringParameterId(String monitoringParameterId) {
+		this.monitoringParameterId = monitoringParameterId;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPerformanceMetric(String performanceMetric) {
+		this.performanceMetric = performanceMetric;
+	}
 }

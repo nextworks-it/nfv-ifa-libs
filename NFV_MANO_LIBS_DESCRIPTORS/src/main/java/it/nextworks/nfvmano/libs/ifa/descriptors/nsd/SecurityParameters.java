@@ -95,4 +95,15 @@ public class SecurityParameters implements DescriptorInformationElement {
 		if (this.algorithm == null) throw new MalformattedElementException("Security Parameters without algorithm");
 	}
 
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+	public void setAlgorithm(String algorithm) {
+		this.algorithm = algorithm;
+	}
+
+	public void setCertificate(String certificate) {
+		this.certificate = certificate;
+	}
 }

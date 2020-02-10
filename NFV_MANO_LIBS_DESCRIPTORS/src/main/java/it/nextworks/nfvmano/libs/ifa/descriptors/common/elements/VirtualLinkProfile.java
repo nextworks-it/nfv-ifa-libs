@@ -242,4 +242,39 @@ public class VirtualLinkProfile implements DescriptorInformationElement {
 		}
 	}
 
+	public void setNsDf(NsDf nsDf) {
+		this.nsDf = nsDf;
+	}
+
+	public void setVnfDf(VnfDf vnfDf) {
+		this.vnfDf = vnfDf;
+	}
+
+	public void setVirtualLinkProfileId(String virtualLinkProfileId) {
+		this.virtualLinkProfileId = virtualLinkProfileId;
+	}
+
+	public void setVirtualLinkDescId(String virtualLinkDescId) {
+		this.virtualLinkDescId = virtualLinkDescId;
+	}
+
+	public void setFlavourId(String flavourId) {
+		this.flavourId = flavourId;
+	}
+
+	public void setLocalAffinityOrAntiAffinityRule(List<AffinityRule> localAffinityOrAntiAffinityRule) {
+		this.localAffinityOrAntiAffinityRule = localAffinityOrAntiAffinityRule;
+	}
+
+	public void setAffinityOrAntiAffinityGroupId(List<String> affinityOrAntiAffinityGroupId) {
+		this.affinityOrAntiAffinityGroupId = affinityOrAntiAffinityGroupId;
+	}
+
+	public void setMaxBitrateRequirements(LinkBitrateRequirements maxBitrateRequirements) {
+		this.maxBitrateRequirements = maxBitrateRequirements;
+	}
+
+	public void setMinBitrateRequirements(LinkBitrateRequirements minBitrateRequirements) {
+		this.minBitrateRequirements = minBitrateRequirements;
+	}
 }

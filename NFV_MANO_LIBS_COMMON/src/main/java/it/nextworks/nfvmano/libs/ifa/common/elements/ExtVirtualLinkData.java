@@ -113,4 +113,23 @@ public class ExtVirtualLinkData implements InterfaceInformationElement {
 		}
 	}
 
+	public void setExtVirtualLinkId(String extVirtualLinkId) {
+		this.extVirtualLinkId = extVirtualLinkId;
+	}
+
+	public void setVimId(String vimId) {
+		this.vimId = vimId;
+	}
+
+	public void setResourceProviderId(String resourceProviderId) {
+		this.resourceProviderId = resourceProviderId;
+	}
+
+	public void setResourceId(String resourceId) {
+		this.resourceId = resourceId;
+	}
+
+	public void setExtCp(List<VnfExtCpData> extCp) {
+		this.extCp = extCp;
+	}
 }

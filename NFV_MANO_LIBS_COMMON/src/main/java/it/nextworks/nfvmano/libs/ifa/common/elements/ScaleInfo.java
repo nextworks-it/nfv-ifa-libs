@@ -75,4 +75,11 @@ public class ScaleInfo implements DescriptorInformationElement {
 		if (aspectId == null) throw new MalformattedElementException("Scale info without aspect ID");
 	}
 
+	public void setAspectId(String aspectId) {
+		this.aspectId = aspectId;
+	}
+
+	public void setScaleLevel(int scaleLevel) {
+		this.scaleLevel = scaleLevel;
+	}
 }

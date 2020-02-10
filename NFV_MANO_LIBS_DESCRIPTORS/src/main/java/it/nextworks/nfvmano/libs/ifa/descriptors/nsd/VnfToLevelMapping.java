@@ -75,4 +75,11 @@ public class VnfToLevelMapping implements DescriptorInformationElement {
 		if (this.vnfProfileId == null) throw new MalformattedElementException("VNF to level mapping without VNF profile ID");
 	}
 
+	public void setVnfProfileId(String vnfProfileId) {
+		this.vnfProfileId = vnfProfileId;
+	}
+
+	public void setNumberOfInstances(int numberOfInstances) {
+		this.numberOfInstances = numberOfInstances;
+	}
 }

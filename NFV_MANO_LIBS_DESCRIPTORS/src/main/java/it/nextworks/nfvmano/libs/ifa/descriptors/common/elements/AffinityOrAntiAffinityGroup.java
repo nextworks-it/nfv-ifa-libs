@@ -91,4 +91,15 @@ public class AffinityOrAntiAffinityGroup implements DescriptorInformationElement
 		if (this.groupId == null) throw new MalformattedElementException("Affinity group without ID");
 	}
 
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public void setAffinityType(AffinityType affinityType) {
+		this.affinityType = affinityType;
+	}
+
+	public void setAffinityScope(AffinityScope affinityScope) {
+		this.affinityScope = affinityScope;
+	}
 }

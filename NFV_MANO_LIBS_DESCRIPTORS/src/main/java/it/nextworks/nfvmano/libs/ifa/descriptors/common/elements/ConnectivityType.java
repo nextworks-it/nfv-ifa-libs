@@ -76,4 +76,11 @@ public class ConnectivityType implements DescriptorInformationElement {
 	@Override
 	public void isValid() throws MalformattedElementException { }
 
+	public void setLayerProtocol(LayerProtocol layerProtocol) {
+		this.layerProtocol = layerProtocol;
+	}
+
+	public void setFlowPattern(String flowPattern) {
+		this.flowPattern = flowPattern;
+	}
 }

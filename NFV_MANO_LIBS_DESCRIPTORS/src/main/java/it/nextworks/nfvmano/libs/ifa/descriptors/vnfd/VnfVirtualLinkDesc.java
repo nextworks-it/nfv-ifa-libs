@@ -183,4 +183,31 @@ public class VnfVirtualLinkDesc implements DescriptorInformationElement {
 		}
 	}
 
+	public void setVnfd(Vnfd vnfd) {
+		this.vnfd = vnfd;
+	}
+
+	public void setVirtualLinkDescId(String virtualLinkDescId) {
+		this.virtualLinkDescId = virtualLinkDescId;
+	}
+
+	public void setConnectivityType(ConnectivityType connectivityType) {
+		this.connectivityType = connectivityType;
+	}
+
+	public void setTestAccess(List<String> testAccess) {
+		this.testAccess = testAccess;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setMonitoringParameter(List<MonitoringParameter> monitoringParameter) {
+		this.monitoringParameter = monitoringParameter;
+	}
+
+	public void setVirtualLinkDescFlavour(List<VirtualLinkDf> virtualLinkDescFlavour) {
+		this.virtualLinkDescFlavour = virtualLinkDescFlavour;
+	}
 }

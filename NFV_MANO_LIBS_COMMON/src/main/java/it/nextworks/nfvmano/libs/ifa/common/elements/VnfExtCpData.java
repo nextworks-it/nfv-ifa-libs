@@ -83,4 +83,15 @@ public class VnfExtCpData implements InterfaceInformationElement {
 		if (cpdId == null) throw new MalformattedElementException("VNF external CP data without CPD ID");
 	}
 
+	public void setCpdId(String cpdId) {
+		this.cpdId = cpdId;
+	}
+
+	public void setFixedAddresses(List<String> fixedAddresses) {
+		this.fixedAddresses = fixedAddresses;
+	}
+
+	public void setDynamicAddresses(Map<String, String> dynamicAddresses) {
+		this.dynamicAddresses = dynamicAddresses;
+	}
 }
