@@ -57,8 +57,7 @@ public class NST {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<NSST> nsstList = new ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    private NstServiceProfile nstServiceProfile;
+    private SliceType sliceType;
 
     @OneToMany(cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -75,15 +74,15 @@ public class NST {
      * @param nstVersion version of the NST
      * @param nstProvider provider of the NST
      * @param nsstIds ID of the network slice subnet templates included in the NST
-     * @param nstServiceProfile service profile associated to the NST
+     * @param sliceType sliceType of the NST
      */
-    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, NstServiceProfile nstServiceProfile) {
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, SliceType sliceType) {
 		this.nstId = nstId;
 		this.nstName = nstName;
 		this.nstVersion = nstVersion;
 		this.nstProvider = nstProvider;
 		if (nsstIds != null) this.nsstIds = nsstIds;
-		this.nstServiceProfile = nstServiceProfile;
+		this.sliceType = sliceType;
 	}
 
     public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<NSST> nsstList) {
@@ -94,13 +93,13 @@ public class NST {
         this.nsstList=nsstList;
     }
 
-    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList) {
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, SliceType sliceType, List<PpFunction> ppFunctionList) {
         this.nstId = nstId;
         this.nstName = nstName;
         this.nstVersion = nstVersion;
         this.nstProvider = nstProvider;
         if (nsstIds != null) this.nsstIds = nsstIds;
-        this.nstServiceProfile = nstServiceProfile;
+        this.sliceType = sliceType;
         setPpFunctionList(ppFunctionList);
     }
 
@@ -136,13 +135,6 @@ public class NST {
         this.nsstIds = nsstIds;
     }
 
-    public NstServiceProfile getNstServiceProfile() {
-        return nstServiceProfile;
-    }
-
-    public void setNstServiceProfile(NstServiceProfile nstServiceProfile) {
-        this.nstServiceProfile = nstServiceProfile;
-    }
 
     public void isValid()  throws MalformattedElementException {
         if(this.nstId == null) throw new MalformattedElementException("NST id not set");
@@ -199,5 +191,13 @@ public class NST {
 
     public void setNstDescription(String nstDescription) {
         this.nstDescription = nstDescription;
+    }
+
+    public SliceType getSliceType() {
+        return sliceType;
+    }
+
+    public void setSliceType(SliceType sliceType) {
+        this.sliceType = sliceType;
     }
 }
