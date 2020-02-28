@@ -38,6 +38,7 @@ public class NSST {
     private String nsdId;
     private String nsdName;
     private String nsdType;
+    private String nsdVersion;
 
     public NSST(){
 
@@ -130,5 +131,13 @@ public class NSST {
    public void isValid()  throws MalformattedElementException {
         if(this.nsdId == null) throw new MalformattedElementException("NSD id not set");
         if(this.nsdName == null) throw new MalformattedElementException("NSD name is not set");
+    }
+
+    public String getNsdVersion() {
+        return nsdVersion;
+    }
+
+    public void setNsdVersion(String nsdVersion) {
+        this.nsdVersion = nsdVersion;
     }
 }
