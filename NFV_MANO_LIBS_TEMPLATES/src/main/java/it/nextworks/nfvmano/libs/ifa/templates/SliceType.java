@@ -17,6 +17,5 @@ package it.nextworks.nfvmano.libs.ifa.templates;
 
 public enum SliceType {
     EMBB,
-    URLLC,
-    MMTC
+    URLLC
 }
