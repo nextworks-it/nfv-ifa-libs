@@ -46,6 +46,17 @@ public class NST {
     private String nstVersion;
     private String nstProvider;
 
+    public List<GeographicalAreaInfo> getGeographicalAreaInfoList() {
+        return geographicalAreaInfoList;
+    }
+
+    public void setGeographicalAreaInfoList(List<GeographicalAreaInfo> geographicalAreaInfoList) {
+        this.geographicalAreaInfoList = geographicalAreaInfoList;
+    }
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<GeographicalAreaInfo> geographicalAreaInfoList;
 
     @ElementCollection(targetClass=String.class)
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -102,7 +113,19 @@ public class NST {
         setPpFunctionList(ppFunctionList);
     }
 
-
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
+               String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList, List<GeographicalAreaInfo> geographicalAreaInfoList) {
+        this.nstId = nstId;
+        this.nstName = nstName;
+        this.nstVersion = nstVersion;
+        this.nstProvider = nstProvider;
+        if (nsstIds != null) this.nsstIds = nsstIds;
+        this.nsdId = nsdId;
+        this.nsdVersion = nsdVersion;
+        this.nstServiceProfile = nstServiceProfile;
+        this.ppFunctionList = ppFunctionList;
+        this.geographicalAreaInfoList = geographicalAreaInfoList;
+    }
 
 
 	public String getNsdVersion() {
@@ -200,4 +223,6 @@ public class NST {
     public UUID getUuid() {
         return this.uuid;
     }
+
+
 }
