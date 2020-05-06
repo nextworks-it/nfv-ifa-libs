@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import javax.persistence.*;
 
+import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.NsstType;
 import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.PpFunction;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -61,6 +62,12 @@ public class NST {
     @ElementCollection(targetClass=String.class)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> nsstIds = new ArrayList<String>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<NST> nsst;
+
+    private NsstType nsstType;
     
     //Additional info to manage the association with NFV NSD
     private String nsdId;
@@ -73,7 +80,10 @@ public class NST {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PpFunction> ppFunctionList = new ArrayList<PpFunction>();
 
-
+    /*
+    * The NST class has 0 to n NST children, also called NSST.
+    * The NST father has NsstType equal to None, while the children has one of the other defined enum values.
+    * */
     public NST() { }
 
     /**
@@ -83,18 +93,17 @@ public class NST {
      * @param nstName name of the NST
      * @param nstVersion version of the NST
      * @param nstProvider provider of the NST
-     * @param nsstIds ID of the network slice subnet templates included in the NST
      * @param nsdId ID of the NFV Network Service Descriptor associated to the NST
      * @param nsdVersion version of the NFV Network Service Descriptor associated to the NST
      * @param nstServiceProfile service profile associated to the NST
      */
-    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider,   List<String> nsstIds, String nsdId,
 			String nsdVersion, NstServiceProfile nstServiceProfile) {
 		this.nstId = nstId;
 		this.nstName = nstName;
 		this.nstVersion = nstVersion;
 		this.nstProvider = nstProvider;
-		if (nsstIds != null) this.nsstIds = nsstIds;
+        if (nsstIds != null) this.nsstIds = nsstIds;
 		this.nsdId = nsdId;
 		this.nsdVersion = nsdVersion;
 		this.nstServiceProfile = nstServiceProfile;
@@ -157,11 +166,11 @@ public class NST {
     }
 
     public List<String> getNsstIds() {
-        return nsstIds;
-    }
+         return nsstIds;
+       }
 
     public void setNsstIds(List<String> nsstIds) {
-        this.nsstIds = nsstIds;
+                this.nsstIds = nsstIds;
     }
 
     public String getNsdId() {
@@ -184,7 +193,7 @@ public class NST {
         if(this.nstId == null) throw new MalformattedElementException("NST id not set");
         if(this.nstVersion == null) throw new MalformattedElementException("NST version not set");
         if(this.nstProvider == null) throw new MalformattedElementException("NST provider not set");
-        if (this.nsdId == null) throw new MalformattedElementException("NFV NSD ID associated to NST not set");
+        //if (this.nsdId == null) throw new MalformattedElementException("NFV NSD ID associated to NST not set");
         if (this.nsdVersion == null) throw new MalformattedElementException("NFV NSD version associated to NST not set");
         for(PpFunction ppFunction: ppFunctionList)
             ppFunction.isValid();
@@ -224,5 +233,20 @@ public class NST {
         return this.uuid;
     }
 
+    public List<NST> getNsst() {
+        return nsst;
+    }
 
+    public void setNsst(List<NST> nsst) {
+        this.nsst = nsst;
+    }
+
+
+    public NsstType getNsstType() {
+        return nsstType;
+    }
+
+    public void setNsstType(NsstType nsstType) {
+        this.nsstType = nsstType;
+    }
 }
