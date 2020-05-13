@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import javax.persistence.*;
 
+import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.Actuation;
 import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.NsstType;
 import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.PpFunction;
 import org.hibernate.annotations.LazyCollection;
@@ -47,14 +48,6 @@ public class NST {
     private String nstVersion;
     private String nstProvider;
 
-    public List<GeographicalAreaInfo> getGeographicalAreaInfoList() {
-        return geographicalAreaInfoList;
-    }
-
-    public void setGeographicalAreaInfoList(List<GeographicalAreaInfo> geographicalAreaInfoList) {
-        this.geographicalAreaInfoList = geographicalAreaInfoList;
-    }
-
     @OneToMany(cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<GeographicalAreaInfo> geographicalAreaInfoList;
@@ -63,9 +56,17 @@ public class NST {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> nsstIds = new ArrayList<String>();
 
+    @ElementCollection(targetClass=String.class)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<String> kpiList = new ArrayList<String>();
+
     @OneToMany(cascade = {CascadeType.ALL})
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<NST> nsst;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Actuation> actuationList;
 
     private NsstType nsstType;
     
@@ -97,38 +98,57 @@ public class NST {
      * @param nsdVersion version of the NFV Network Service Descriptor associated to the NST
      * @param nstServiceProfile service profile associated to the NST
      */
-    public NST(String nstId, String nstName, String nstVersion, String nstProvider,   List<String> nsstIds, String nsdId,
-			String nsdVersion, NstServiceProfile nstServiceProfile) {
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, List<String> kpiList,
+               List<Actuation> actuationList,  String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile) {
 		this.nstId = nstId;
 		this.nstName = nstName;
 		this.nstVersion = nstVersion;
 		this.nstProvider = nstProvider;
         if (nsstIds != null) this.nsstIds = nsstIds;
-		this.nsdId = nsdId;
+
+        this.kpiList= new ArrayList<String>();
+        if(kpiList !=null ) this.kpiList = kpiList;
+
+        this.actuationList= new ArrayList<>();
+        if(actuationList !=null ) this.actuationList = actuationList;
+
+        this.nsdId = nsdId;
 		this.nsdVersion = nsdVersion;
 		this.nstServiceProfile = nstServiceProfile;
 	}
 
-    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
-               String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList) {
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds,  List<String> kpiList, List<Actuation> actuationList,
+               String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList) {
         this.nstId = nstId;
         this.nstName = nstName;
         this.nstVersion = nstVersion;
         this.nstProvider = nstProvider;
         if (nsstIds != null) this.nsstIds = nsstIds;
+        this.kpiList= new ArrayList<String>();
+        if(kpiList !=null ) this.kpiList = kpiList;
+
+        this.actuationList= new ArrayList<>();
+        if(actuationList !=null ) this.actuationList = actuationList;
+
         this.nsdId = nsdId;
         this.nsdVersion = nsdVersion;
         this.nstServiceProfile = nstServiceProfile;
         setPpFunctionList(ppFunctionList);
     }
 
-    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, String nsdId,
-               String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList, List<GeographicalAreaInfo> geographicalAreaInfoList) {
+    public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, List<String> kpiList, List<Actuation> actuationList,
+               String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList, List<GeographicalAreaInfo> geographicalAreaInfoList) {
         this.nstId = nstId;
         this.nstName = nstName;
         this.nstVersion = nstVersion;
         this.nstProvider = nstProvider;
         if (nsstIds != null) this.nsstIds = nsstIds;
+        this.kpiList= new ArrayList<String>();
+        if(kpiList !=null ) this.kpiList = kpiList;
+
+        this.actuationList= new ArrayList<>();
+        if(actuationList !=null ) this.actuationList = actuationList;
+
         this.nsdId = nsdId;
         this.nsdVersion = nsdVersion;
         this.nstServiceProfile = nstServiceProfile;
@@ -241,6 +261,13 @@ public class NST {
         this.nsst = nsst;
     }
 
+    public List<GeographicalAreaInfo> getGeographicalAreaInfoList() {
+        return geographicalAreaInfoList;
+    }
+
+    public void setGeographicalAreaInfoList(List<GeographicalAreaInfo> geographicalAreaInfoList) {
+        this.geographicalAreaInfoList = geographicalAreaInfoList;
+    }
 
     public NsstType getNsstType() {
         return nsstType;
@@ -248,5 +275,21 @@ public class NST {
 
     public void setNsstType(NsstType nsstType) {
         this.nsstType = nsstType;
+    }
+
+    public List<String> getKpiList() {
+        return kpiList;
+    }
+
+    public void setKpiList(List<String> kpiList) {
+        this.kpiList = kpiList;
+    }
+
+    public List<Actuation> getActuationList() {
+        return actuationList;
+    }
+
+    public void setActuationList(List<Actuation> actuationList) {
+        this.actuationList = actuationList;
     }
 }
