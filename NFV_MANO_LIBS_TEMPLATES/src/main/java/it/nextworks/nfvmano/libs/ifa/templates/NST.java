@@ -24,7 +24,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
+import it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay.NsstType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -48,17 +50,27 @@ public class NST {
     private String nstName;
     private String nstVersion;
     private String nstProvider;
-    
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<GeographicalAreaInfo> geographicalAreaInfoList;
+
     @ElementCollection(targetClass=String.class)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<String> nsstIds = new ArrayList<String>();
     
+ 	@OneToMany(cascade = {CascadeType.ALL})
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<NST> nsst;
+
     //Additional info to manage the association with NFV NSD
     private String nsdId;
     private String nsdVersion;
 
     @OneToOne(cascade = {CascadeType.ALL})
     private NstServiceProfile nstServiceProfile;
+
+	private NsstType nsstType;
 
     public NST() { }
 
@@ -155,15 +167,40 @@ public class NST {
         if(this.nstId == null) throw new MalformattedElementException("NST id not set");
         if(this.nstVersion == null) throw new MalformattedElementException("NST version not set");
         if(this.nstProvider == null) throw new MalformattedElementException("NST provider not set");
-        if (this.nsdId == null) throw new MalformattedElementException("NFV NSD ID associated to NST not set");
-        if (this.nsdVersion == null) throw new MalformattedElementException("NFV NSD version associated to NST not set");
+
+        //if (this.nsdId == null) throw new MalformattedElementException("NFV NSD ID associated to NST not set");
+        //if (this.nsdVersion == null) throw new MalformattedElementException("NFV NSD version associated to NST not set");
     }
 
 	public String getNstName() {
 		return nstName;
 	}
 
+ public List<GeographicalAreaInfo> getGeographicalAreaInfoList() {
+        return geographicalAreaInfoList;
+    }
+
+    public void setGeographicalAreaInfoList(List<GeographicalAreaInfo> geographicalAreaInfoList) {
+        this.geographicalAreaInfoList = geographicalAreaInfoList;
+    }
+
+	public NsstType getNsstType() {
+        return nsstType;
+    } 
+	public void setNsstType(NsstType nsstType) {
+        this.nsstType = nsstType;
+    }
+
 	public void setNstName(String nstName) {
 		this.nstName = nstName;
 	}
+
+	public List<NST> getNsst() {
+        return nsst;
+    }
+
+    public void setNsst(List<NST> nsst) {
+        this.nsst = nsst;
+    }
+
 }

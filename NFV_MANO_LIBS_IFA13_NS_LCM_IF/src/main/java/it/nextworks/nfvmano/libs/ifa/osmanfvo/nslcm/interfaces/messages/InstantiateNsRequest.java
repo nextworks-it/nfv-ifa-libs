@@ -73,6 +73,7 @@ public class InstantiateNsRequest implements InterfaceMessage {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String nsInstantiationLevelId;
 
+
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private List<AffinityRule> additionalAffinityOrAntiAffinityRule = new ArrayList<>();
 	
@@ -99,6 +100,7 @@ public class InstantiateNsRequest implements InterfaceMessage {
 	 * @param startTime Timestamp indicating the earliest time to instantiate the NS. Cardinality "0" indicates the NS instantiation takes place immediately.
 	 * @param nsInstantiationLevelId Identifies one of the NS instantiation levels declared in the DF applicable to this NS instance. If not present, the default NS instantiation level as declared in the NSD shall be used.
 	 * @param additionalAffinityOrAntiAffinityRule Specifies additional affinity or anti-affinity constraint for the VNF instances to be instantiated as part of the NS instantiation. Shall not conflict with rules already specified in the NSD.
+	 * @param serviceType Service Type (EMBB; URLLC
 	 */
 	public InstantiateNsRequest(String nsInstanceId, 
 			String flavourId, 
@@ -124,6 +126,7 @@ public class InstantiateNsRequest implements InterfaceMessage {
 		this.startTime = startTime;
 		this.nsInstantiationLevelId = nsInstantiationLevelId;
 		if (additionalAffinityOrAntiAffinityRule != null) this.additionalAffinityOrAntiAffinityRule = additionalAffinityOrAntiAffinityRule;
+
 	}
 	
 	/**
