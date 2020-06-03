@@ -447,6 +447,7 @@ public class Vnfd implements DescriptorInformationElement {
             for (Vdu v : vdu) v.isValid();
         }
         for (VirtualComputeDesc v : virtualComputeDesc) v.isValid();
+        for (VirtualComputeDesc v : virtualComputeDesc) v.isValid();
         for (VirtualStorageDesc v : virtualStorageDesc) v.isValid();
         for (VnfVirtualLinkDesc v : intVirtualLinkDesc) v.isValid();
         if ((vnfExtCpd == null) || (vnfExtCpd.isEmpty())) {
@@ -467,6 +468,14 @@ public class Vnfd implements DescriptorInformationElement {
         for (VnfdElementGroup v : elementGroup) v.isValid();
         for (VnfIndicator i : vnfIndicator) i.isValid();
         for (Rule r : autoScale) r.isValid();
+    }
+
+    public void setVdu(List<Vdu> vdu) {
+        this.vdu = vdu;
+    }
+
+    public void setVirtualComputeDesc(List<VirtualComputeDesc> virtualComputeDesc) {
+        this.virtualComputeDesc = virtualComputeDesc;
     }
 
 }

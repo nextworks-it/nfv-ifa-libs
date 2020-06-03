@@ -1,12 +1,13 @@
 package it.nextworks.nfvmano.libs.ifa.templates.plugAndPlay;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 import java.util.Map;
 
 @Entity
@@ -15,7 +16,6 @@ public class Actuation {
     private String name;
     private String description;
 
-    //@JsonInclude(JsonInclude.Include.NON_EMPTY)
     @ElementCollection(fetch= FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
