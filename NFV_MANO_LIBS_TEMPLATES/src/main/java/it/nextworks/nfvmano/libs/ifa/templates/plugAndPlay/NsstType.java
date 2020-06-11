@@ -4,5 +4,5 @@ public enum NsstType {
     NONE,
     RAN,
     CORE,
-    EHEALTH //Application-specific
+    APP //Application-specific
 }

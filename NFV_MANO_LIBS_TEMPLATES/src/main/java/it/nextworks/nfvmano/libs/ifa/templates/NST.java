@@ -73,6 +73,8 @@ public class NST {
     //Additional info to manage the association with NFV NSD
     private String nsdId;
     private String nsdVersion;
+    private String nsdName;
+    private String nsdType;
 
     @OneToOne(cascade = {CascadeType.ALL})
     private NstServiceProfile nstServiceProfile;
@@ -81,6 +83,7 @@ public class NST {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PpFunction> ppFunctionList = new ArrayList<PpFunction>();
 
+    private boolean nsToBeInstanciated;
     /*
     * The NST class has 0 to n NST children, also called NSST.
     * The NST father has NsstType equal to None, while the children has one of the other defined enum values.
@@ -99,7 +102,7 @@ public class NST {
      * @param nstServiceProfile service profile associated to the NST
      */
     public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, List<String> kpiList,
-               List<Actuation> actuationList,  String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile) {
+               List<Actuation> actuationList,  String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, String nsdName, String nsdType) {
 		this.nstId = nstId;
 		this.nstName = nstName;
 		this.nstVersion = nstVersion;
@@ -115,10 +118,13 @@ public class NST {
         this.nsdId = nsdId;
 		this.nsdVersion = nsdVersion;
 		this.nstServiceProfile = nstServiceProfile;
+		this.nsToBeInstanciated = true;
+		this.nsdName = nsdName;
+		this.nsdType = nsdType;
 	}
 
     public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds,  List<String> kpiList, List<Actuation> actuationList,
-               String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList) {
+               String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList, String nsdName, String nsdType) {
         this.nstId = nstId;
         this.nstName = nstName;
         this.nstVersion = nstVersion;
@@ -134,10 +140,13 @@ public class NST {
         this.nsdVersion = nsdVersion;
         this.nstServiceProfile = nstServiceProfile;
         setPpFunctionList(ppFunctionList);
+        this.nsToBeInstanciated = true;
+        this.nsdName = nsdName;
+        this.nsdType = nsdType;
     }
 
     public NST(String nstId, String nstName, String nstVersion, String nstProvider, List<String> nsstIds, List<String> kpiList, List<Actuation> actuationList,
-               String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList, List<GeographicalAreaInfo> geographicalAreaInfoList) {
+               String nsdId, String nsdVersion, NstServiceProfile nstServiceProfile, List<PpFunction> ppFunctionList, List<GeographicalAreaInfo> geographicalAreaInfoList, String nsdName, String nsdType) {
         this.nstId = nstId;
         this.nstName = nstName;
         this.nstVersion = nstVersion;
@@ -154,6 +163,9 @@ public class NST {
         this.nstServiceProfile = nstServiceProfile;
         this.ppFunctionList = ppFunctionList;
         this.geographicalAreaInfoList = geographicalAreaInfoList;
+        this.nsToBeInstanciated = true;
+        this.nsdName = nsdName;
+        this.nsdType = nsdType;
     }
 
 
@@ -291,5 +303,29 @@ public class NST {
 
     public void setActuationList(List<Actuation> actuationList) {
         this.actuationList = actuationList;
+    }
+
+    public boolean isNsToBeInstanciated() {
+        return nsToBeInstanciated;
+    }
+
+    public void setNsToBeInstanciated(boolean nsToBeInstanciated) {
+        this.nsToBeInstanciated = nsToBeInstanciated;
+    }
+
+    public String getNsdName() {
+        return nsdName;
+    }
+
+    public void setNsdName(String nsdName) {
+        this.nsdName = nsdName;
+    }
+
+    public String getNsdType() {
+        return nsdType;
+    }
+
+    public void setNsdType(String nsdType) {
+        this.nsdType = nsdType;
     }
 }
