@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>it.nextworks.nfvmano</groupId>
-  <artifactId>NfvManoLibsPolicyMgtIf</artifactId>
+  <artifactId>nfv-mano-libs-policy-mgt-if</artifactId>
   <version>0.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -30,7 +30,7 @@
 
     <dependency>
       <groupId>it.nextworks.nfvmano</groupId>
-      <artifactId>NfvManoLibsCommon</artifactId>
+      <artifactId>nfv-mano-libs-common</artifactId>
       <version>0.0.2-SNAPSHOT</version>
     </dependency>
 
