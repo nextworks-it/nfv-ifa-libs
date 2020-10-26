@@ -52,7 +52,6 @@ public class MonitoredData implements DescriptorInformationElement {
 	private VnfIndicatorData vnfIndicatorInfo;
 
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-	@JsonIgnore
 	@JoinColumn(name="monitoring_parameter_id")
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonInclude(JsonInclude.Include.NON_NULL)
