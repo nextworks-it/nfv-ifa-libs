@@ -15,10 +15,9 @@
 */
 package it.nextworks.nfvmano.libs.ifa.common.elements;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.FetchType;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -39,8 +38,14 @@ import java.util.Map;
  * @author nextworks
  *
  */
-@Embeddable
+@Entity
 public class MonitoringParameter implements DescriptorInformationElement {
+
+
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
 
 	private String monitoringParameterId;
 	
