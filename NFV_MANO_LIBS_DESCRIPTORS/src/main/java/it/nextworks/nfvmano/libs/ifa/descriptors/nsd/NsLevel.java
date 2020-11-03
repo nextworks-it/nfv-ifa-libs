@@ -27,6 +27,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import it.nextworks.nfvmano.libs.ifa.descriptors.common.elements.VirtualLinkDf;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -180,6 +181,11 @@ public class NsLevel implements DescriptorInformationElement {
 	@JsonProperty("virtualLinkToLevelMapping")
 	public List<VirtualLinkToLevelMapping> getVirtualLinkToLevelMapping() {
 		return virtualLinkToLevelMapping;
+	}
+
+	@JsonIgnore
+	public void addVirtualLinkToLevelMapping(VirtualLinkToLevelMapping mapping) {
+		this.virtualLinkToLevelMapping.add(mapping);
 	}
 
 	@Override
