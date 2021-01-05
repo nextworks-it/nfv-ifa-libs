@@ -53,17 +53,15 @@ public class SapData implements InterfaceInformationElement {
 
 	
 	public SapData() {	}
-
-
+	
 	/**
 	 * Constructor
-	 *
+	 * 
 	 * @param sapdId	Reference to the SAPD for this SAP.
 	 * @param sapName Human readable name for the SAP.
 	 * @param description Human readable description for the SAP.
 	 * @param address Address for this SAP.
 	 * @param locationInfo Location for this SAP.
-
 	 */
 	public SapData(String sapdId, String sapName, String description, String address, LocationInfo locationInfo) {
 		this.sapdId = sapdId;
@@ -71,8 +69,8 @@ public class SapData implements InterfaceInformationElement {
 		this.description = description;
 		this.address = address;
 		this.locationInfo = locationInfo;  //This is an extensions to the standard
-		this.sliceParameters= sliceParameters;
 	}
+
 	/**
 	 * Constructor
 	 * 
@@ -95,7 +93,6 @@ public class SapData implements InterfaceInformationElement {
 	public Map<String, Object> getSliceParameters() {
 		return sliceParameters;
 	}
-
 	/**
 	 * @return the sapId
 	 */

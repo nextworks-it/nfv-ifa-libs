@@ -15,11 +15,7 @@
 */
 package it.nextworks.nfvmano.libs.ifa.descriptors.nsd;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -28,6 +24,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import it.nextworks.nfvmano.libs.ifa.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.ifa.common.elements.MonitoringParameter;
 import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementException;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 /**
  * The MonitoredData information element identifies information to be monitored 
@@ -52,8 +50,10 @@ public class MonitoredData implements DescriptorInformationElement {
 	@Embedded
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private VnfIndicatorData vnfIndicatorInfo;
-	
-	@Embedded
+
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@JoinColumn(name="monitoring_parameter_id")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private MonitoringParameter monitoringParameter;
 	

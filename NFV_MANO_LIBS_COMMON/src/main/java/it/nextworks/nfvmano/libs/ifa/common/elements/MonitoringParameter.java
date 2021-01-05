@@ -15,13 +15,20 @@
 */
 package it.nextworks.nfvmano.libs.ifa.common.elements;
 
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import it.nextworks.nfvmano.libs.ifa.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementException;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The MonitoringParameter information specifies a virtualised 
@@ -31,17 +38,43 @@ import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementExcept
  * @author nextworks
  *
  */
-@Embeddable
+@Entity
 public class MonitoringParameter implements DescriptorInformationElement {
+
+
+	@Id
+	@GeneratedValue
+	@JsonIgnore
+	private Long id;
 
 	private String monitoringParameterId;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String name;
-	
+
+
 	private String performanceMetric;
-	
-	
+
+
+	//OUT OF THE STANDARD: 5growth
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String exporter;
+
+
+	//OUT OF THE STANDARD: 5growth
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	@ElementCollection(fetch= FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private Map<String, String> params= new HashMap<>();
+
+	//OUT OF THE STANDARD: 5growth
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String type;
+
+
+
+
 	public MonitoringParameter() {
 		// JPA only
 	}
@@ -52,16 +85,35 @@ public class MonitoringParameter implements DescriptorInformationElement {
 	 * @param monitoringParameterId Unique identifier of this monitoring parameter information element.
 	 * @param name Human readable name of the monitoring parameter.
 	 * @param performanceMetric Defines the virtualised resource-related performance metric.
+	 * @param params exporter parameter
 	 */
 	public MonitoringParameter(String monitoringParameterId,
 			String name,
-			String performanceMetric) {
+			String performanceMetric,
+							   String type,
+							   Map<String, String> params,
+							   String exporter) {
 		this.monitoringParameterId = monitoringParameterId;
 		this.name = name;
 		this.performanceMetric = performanceMetric;
+		if(params!=null) this.params=params;
+		this.exporter=exporter;
+		this.type= type;
 	}
 
-	
+
+	public String getExporter() {
+		return exporter;
+	}
+
+	public Map<String, String> getParams() {
+		return params;
+	}
+
+	public String getType() {
+		return type;
+	}
+
 	/**
 	 * @return the monitoringParameterId
 	 */

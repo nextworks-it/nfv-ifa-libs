@@ -77,6 +77,11 @@ public class VirtualComputeDesc implements InterfaceMessage {
 	Appd appd;
 	
 	private String virtualComputeDescId;
+
+
+	// Out of the standard. Used for arbitratorion purposes. Should contain the complexity factor
+	// for the VNF v indicating the amount of vCPU required to process a traffic unit by v
+	private String complexityFactor;
 	
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -145,6 +150,32 @@ public class VirtualComputeDesc implements InterfaceMessage {
 		this.virtualCpu = virtualCpu;
 		this.virtualMemory = virtualMemory;
 	}
+
+	/**
+	 * Constructor
+	 *
+	 * @param appd AppD this virtual compute descriptor belongs to
+	 * @param virtualComputeDescId Unique identifier of this VirtualComputeDesc in the VNFD.
+	 * @param logicalNode The logical Node requirements.
+	 * @param requestAdditionalCapabilities Specifies requirements for additional capabilities.
+	 * @param virtualCpu The virtual CPU(s) of the virtualised compute.
+	 * @param virtualMemory The virtual memory of the virtualised compute.
+	 */
+	public VirtualComputeDesc(Appd appd,
+							  String virtualComputeDescId,
+							  Map<String, String> logicalNode,
+							  List<RequestedAdditionalCapabilityData> requestAdditionalCapabilities,
+							  VirtualCpuData virtualCpu,
+							  VirtualMemoryData virtualMemory,
+							  String complexityFactor) {
+		this.appd = appd;
+		this.virtualComputeDescId = virtualComputeDescId;
+		if (logicalNode != null) this.logicalNode = logicalNode;
+		if (requestAdditionalCapabilities != null) this.requestAdditionalCapabilities = requestAdditionalCapabilities;
+		this.virtualCpu = virtualCpu;
+		this.virtualMemory = virtualMemory;
+		this.complexityFactor=complexityFactor;
+	}
 	
 	
 
@@ -187,6 +218,15 @@ public class VirtualComputeDesc implements InterfaceMessage {
 	@JsonProperty("virtualCpu")
 	public VirtualCpuData getVirtualCpu() {
 		return virtualCpu;
+	}
+
+
+	/**
+	 * @return the complexityFactor
+	 */
+	@JsonProperty("complexityFactor")
+	public String getComplexityFactor() {
+		return complexityFactor;
 	}
 
 	@Override
