@@ -30,7 +30,7 @@
 			<artifactId>NfvManoLibsCommon</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>it.nextworks.nfvmano</groupId>
 			<artifactId>NfvManoLibsDescriptors</artifactId>
