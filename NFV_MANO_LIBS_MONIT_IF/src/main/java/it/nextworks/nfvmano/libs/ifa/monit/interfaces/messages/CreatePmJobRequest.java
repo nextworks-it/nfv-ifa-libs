@@ -16,7 +16,9 @@
 package it.nextworks.nfvmano.libs.ifa.monit.interfaces.messages;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -50,7 +52,12 @@ public class CreatePmJobRequest implements InterfaceMessage {
 	private int collectionPeriod;
 	private int reportingPeriod;
 	private String reportingBoundary;
-	
+
+
+	//OUT OF THE STANDARD
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private Map<String, String> pmJobParams = new HashMap<>();
+
 	public CreatePmJobRequest() { }
 	
 	/**
@@ -81,6 +88,43 @@ public class CreatePmJobRequest implements InterfaceMessage {
 		this.collectionPeriod = collectionPeriod;
 		this.reportingPeriod = reportingPeriod;
 		this.reportingBoundary = reportingBoundary;
+	}
+
+	public Map<String, String> getPmJobParams() {
+		return pmJobParams;
+	}
+
+	/**
+	 * Constructor
+	 *
+	 * @param nsSelector Defines the NSs for which performance information is to be collected
+	 * @param resourceSelector Defines the resources for which performance information is requested to be collected.
+	 * @param vnfSelector Defines the VNFs for which performance information is requested to be collected.
+	 * @param performanceMetric the type of performance metric(s) for the specified resources.
+	 * @param performanceMetricGroup Group of performance metrics. A metric group is a pre-defined list of metrics, known to the producer that  it can decompose to individual metrics.
+	 * @param collectionPeriod Specifies the periodicity at which the VIM will collect performance information
+	 * @param reportingPeriod Specifies the periodicity at which the VIM will report to the NFVO about performance information
+	 * @param reportingBoundary Identifies a boundary after which the reporting will stop. The boundary shall allow a single reporting as well as periodic reporting up to the boundary.
+	 * @param pmJobParams  Additional params for pm Job Creation
+	 * 	 */
+	public CreatePmJobRequest(ObjectSelection nsSelector,
+							  ObjectSelection resourceSelector,
+							  ObjectSelection vnfSelector,
+							  List<String> performanceMetric,
+							  List<String> performanceMetricGroup,
+							  int collectionPeriod,
+							  int reportingPeriod,
+							  String reportingBoundary,
+							  Map<String, String> pmJobParams) {
+		this.nsSelector = nsSelector;
+		this.resourceSelector = resourceSelector;
+		this.vnfSelector = vnfSelector;
+		if (performanceMetric != null) this.performanceMetric = performanceMetric;
+		if (performanceMetricGroup != null) this.performanceMetricGroup = performanceMetricGroup;
+		this.collectionPeriod = collectionPeriod;
+		this.reportingPeriod = reportingPeriod;
+		this.reportingBoundary = reportingBoundary;
+		if(pmJobParams!=null) this.pmJobParams=pmJobParams;
 	}
 	
 	
