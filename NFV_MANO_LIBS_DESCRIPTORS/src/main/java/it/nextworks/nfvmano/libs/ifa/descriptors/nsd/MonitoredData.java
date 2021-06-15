@@ -20,7 +20,9 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import it.nextworks.nfvmano.libs.ifa.common.DescriptorInformationElement;
 import it.nextworks.nfvmano.libs.ifa.common.elements.MonitoringParameter;
 import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementException;
@@ -60,6 +62,11 @@ public class MonitoredData implements DescriptorInformationElement {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private MonitoringParameter monitoringParameter;
 
+
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	@ElementCollection(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 
 	//Out of the standard
 	private Map<String, String> metricMetadata= new HashMap<>();
