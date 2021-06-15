@@ -27,6 +27,9 @@ import it.nextworks.nfvmano.libs.ifa.common.exceptions.MalformattedElementExcept
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The MonitoredData information element identifies information to be monitored 
  * during the lifetime of a network service instance.
@@ -56,6 +59,10 @@ public class MonitoredData implements DescriptorInformationElement {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private MonitoringParameter monitoringParameter;
+
+
+	//Out of the standard
+	private Map<String, String> metricMetadata= new HashMap<>();
 	
 	public MonitoredData() {
 		// JPA only
@@ -75,7 +82,32 @@ public class MonitoredData implements DescriptorInformationElement {
 		this.vnfIndicatorInfo = vnfIndicatorInfo;
 		this.monitoringParameter = monitoringParameter;
 	}
-	
+
+
+	/**
+	 * Constructor
+	 *
+	 * @param nsd Network Service Descriptor this Monitoring Data refers to.
+	 * @param vnfIndicatorInfo Uniquely identifies this VNF Indicator information element.
+	 * @param monitoringParameter Specifies the virtualised resource related performance metric to be monitored on an NS level or VNF level.
+	 */
+	public MonitoredData(Nsd nsd,
+						 VnfIndicatorData vnfIndicatorInfo,
+						 MonitoringParameter monitoringParameter, Map<String, String> metricMetadata) {
+		this.nsd = nsd;
+		this.vnfIndicatorInfo = vnfIndicatorInfo;
+		this.monitoringParameter = monitoringParameter;
+		if(metricMetadata!=null) this.metricMetadata=metricMetadata;
+	}
+
+	public Map<String, String> getMetricMetadata() {
+		return metricMetadata;
+	}
+
+	public void setMetricMetadata(Map<String, String> metricMetadata) {
+		this.metricMetadata = metricMetadata;
+	}
+
 	/**
 	 * @return the vnfIndicatorInfo
 	 */

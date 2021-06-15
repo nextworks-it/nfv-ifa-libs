@@ -58,6 +58,11 @@ public class CreatePmJobRequest implements InterfaceMessage {
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private Map<String, String> pmJobParams = new HashMap<>();
 
+	//OUT OF THE STANDARD
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private Map<String, String> metricMetadata = new HashMap<>();
+
+
 	public CreatePmJobRequest() { }
 	
 	/**
@@ -115,7 +120,8 @@ public class CreatePmJobRequest implements InterfaceMessage {
 							  int collectionPeriod,
 							  int reportingPeriod,
 							  String reportingBoundary,
-							  Map<String, String> pmJobParams) {
+							  Map<String, String> pmJobParams,
+							  Map<String, String> metricMetadata) {
 		this.nsSelector = nsSelector;
 		this.resourceSelector = resourceSelector;
 		this.vnfSelector = vnfSelector;
@@ -125,9 +131,13 @@ public class CreatePmJobRequest implements InterfaceMessage {
 		this.reportingPeriod = reportingPeriod;
 		this.reportingBoundary = reportingBoundary;
 		if(pmJobParams!=null) this.pmJobParams=pmJobParams;
+		if(metricMetadata!=null) this.metricMetadata= metricMetadata;
 	}
-	
-	
+
+
+	public Map<String, String> getMetricMetadata() {
+		return metricMetadata;
+	}
 
 	/**
 	 * @return the nsSelector
