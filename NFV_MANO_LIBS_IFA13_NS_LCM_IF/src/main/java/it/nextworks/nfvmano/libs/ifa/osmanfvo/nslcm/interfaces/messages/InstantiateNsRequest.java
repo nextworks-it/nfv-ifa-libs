@@ -80,11 +80,23 @@ public class InstantiateNsRequest implements InterfaceMessage {
 	//not standard
 	@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 	private String serviceType;
+
+	//not standard
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private Map<String, String> vlMapping = new HashMap<>();
 	
 	public InstantiateNsRequest() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	public Map<String, String> getVlMapping() {
+		return vlMapping;
+	}
+
+	public void setVlMapping(Map<String, String> vlMapping) {
+		this.vlMapping = vlMapping;
+	}
+
 	/**
 	 * Constructor
 	 * 
