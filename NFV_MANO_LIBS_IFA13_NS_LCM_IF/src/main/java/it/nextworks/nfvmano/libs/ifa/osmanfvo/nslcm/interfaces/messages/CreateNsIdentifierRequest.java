@@ -34,6 +34,7 @@ public class CreateNsIdentifierRequest implements InterfaceMessage {
 	
 	//This is not standard
 	private String tenantId;
+	private String vimId;
 	
 	public CreateNsIdentifierRequest() { }
 	
@@ -52,8 +53,14 @@ public class CreateNsIdentifierRequest implements InterfaceMessage {
 		this.tenantId = tenantId;
 	}
 
-	
-	
+	public String getVimId() {
+		return vimId;
+	}
+
+	public void setVimId(String vimId) {
+		this.vimId = vimId;
+	}
+
 	/**
 	 * @return the tenantId
 	 */
